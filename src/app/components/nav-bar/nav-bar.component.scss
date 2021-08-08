@@ -14,9 +14,22 @@
     i.far {
       padding: 0.5em 0.6em;
     }
+
+    &:hover {
+      background: lighten($green, 5%);
+      transition: background-color 0.2s ease-in-out;
+      cursor: pointer;
+    }
   }
 
   .nav-bar-icon-btn-blue {
     background: $blue-lightened;
+
+    &:hover {
+      background: lighten($blue, 15%);
+
+      transition: background-color 0.2s ease-in-out;
+      cursor: pointer;
+    }
   }
 }
