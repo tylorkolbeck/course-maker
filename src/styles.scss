@@ -40,26 +40,42 @@ strong {
   background-color: $blue-secondary;
 }
 
+.ql-toolbar button:hover {
+  & .ql-fill {
+    fill: $green !important;
+  }
+
+  & .ql-stroke {
+    stroke: $green !important;
+  }
+
+  & .ql-fill {
+    fill: $green !important;
+  }
+}
+
 .ql-toolbar .ql-stroke {
-  fill: none;
   stroke: #fff;
-  color: #fff;
 }
 
 .ql-toolbar .ql-fill {
   fill: #fff;
-  stroke: none;
-  color: #fff;
 }
 
 .ql-toolbar .ql-picker {
   color: #fff;
 }
 
-.ql-toolbar .ql-active .ql-active {
-  fill: $green;
-  stroke: none;
-  color: $green;
+.ql-toolbar .ql-active .ql-stroke {
+  stroke: $green !important;
+}
+
+.ql-toolbar .ql-active .ql-fill {
+  fill: $green !important;
+}
+
+.ql-toolbar .ql-active .ql-picker {
+  color: $green !important;
 }
 
 html,
