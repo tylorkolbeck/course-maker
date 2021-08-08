@@ -1,0 +1,25 @@
+@import "../../../main-styles.scss";
+
+.note-card-container {
+  background: lighten($blue, 5%);
+  border-top: 1px solid lighten($blue, 2%);
+  padding: 10px;
+  position: relative;
+
+  .note-card-title {
+    font-size: 1.1rem;
+  }
+  .note-card-date {
+    color: lighten($green, 20%);
+    font-size: 0.8rem;
+  }
+
+  &:hover {
+    background-color: $blue;
+    cursor: pointer;
+  }
+}
+
+.note-card-active {
+  background: darken($green, 15%) !important;
+}

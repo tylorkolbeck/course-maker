@@ -1,0 +1,22 @@
+@import "../../../main-styles.scss";
+
+.nav-bar-container {
+  background: $blue;
+  height: 60px;
+  .nav-bar-logo {
+    font-weight: bold;
+    color: $green;
+  }
+
+  .nav-bar-icon-btn {
+    background: $green;
+    i.fas,
+    i.far {
+      padding: 0.5em 0.6em;
+    }
+  }
+
+  .nav-bar-icon-btn-blue {
+    background: $blue-lightened;
+  }
+}

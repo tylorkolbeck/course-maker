@@ -1,0 +1,59 @@
+@import "../../../main-styles.scss";
+
+.note-list-container {
+  position: relative;
+  overflow-y: scroll;
+  -webkit-transition: width 0.1s ease-in-out;
+  -moz-transition: width 0.1s ease-in-out;
+  -o-transition: width 0.1s ease-in-out;
+  transition: width 0.1s ease-in-out;
+  width: 300px;
+  max-height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
+
+  .note-list {
+    // overflow-y: scroll;
+    background: $blue;
+    height: 100%;
+  }
+
+  .note-list-search-input {
+    border-radius: 0;
+  }
+
+  .note-list-toggle {
+    position: fixed;
+    left: 300px;
+    top: 130px;
+    background-color: darken($blue-secondary, 2%);
+    padding: 6px;
+    // top: 10%;
+    width: 30px;
+    // right: -30px;
+    border-radius: 0px 6px 6px 0px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+
+    &:hover {
+      cursor: pointer;
+      background-color: lighten($blue, 20%);
+    }
+
+    & i {
+      color: $green;
+      // transform: rotate(90deg);
+    }
+  }
+}
+
+.side-nav-bar-collapsed {
+  width: 0px !important;
+
+  & .note-list {
+    display: none;
+  }
+
+  & .note-list-toggle {
+    left: 0px;
+  }
+}

@@ -1,0 +1,28 @@
+<div
+  class="note-list-container"
+  [ngClass]="{ 'side-nav-bar-collapsed': !(showSideNav$ | async) }"
+>
+  <div class="note-list-toggle" (click)="onSidebarToggle()">
+    <i class="fas fa-bars"></i>
+  </div>
+  <!-- <div style="position: fixed; left: 300px; top: 160px; background: red">
+    Test
+  </div> -->
+
+  <div class="note-list">
+    <p class="control has-icons-left">
+      <input
+        class="input note-list-search-input"
+        type="text"
+        placeholder="Search"
+      />
+      <span class="icon is-small is-left">
+        <i class="fas fa-search"></i>
+      </span>
+    </p>
+    <app-note-card></app-note-card>
+    <app-note-card></app-note-card>
+    <app-note-card [editing]="true"></app-note-card>
+    <app-note-card></app-note-card>
+  </div>
+</div>

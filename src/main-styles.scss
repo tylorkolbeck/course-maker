@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
+
+// Brand colors
+$blue: #232931;
+$blue-lightened: lighten($blue, 10%);
+$blue-secondary: #393e46;
+$green: #4ecca3;
+$white: #eeeeee;
+
+// Update Bulma's global variables
+$family-sans-serif: "Noto Sans", sans-serif;
+$grey-dark: $blue;
+$grey-light: $white;
+$primary: $blue-secondary;
+$link: $green;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+$text: $white;
+
+// Update some of Bulma's component variables
+$body-background-color: $blue-secondary;
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+$link-hover: lighten($green, 20%);
+$input-background-color: $blue-lightened;
+$input-placeholder-color: rgba($white, 0.7);
+
+// Import only what you need from Bulma
+// @import "../node_modules/bulma/sass/utilities/_all.sass";
+// @import "../node_modules/bulma/sass/base/_all.sass";
+// @import "../node_modules/bulma/sass/elements/button.sass";
+// @import "../node_modules/bulma/sass/elements/container.sass";
+// @import "../node_modules/bulma/sass/elements/title.sass";
+// @import "../node_modules/bulma/sass/form/_all.sass";
+// @import "../node_modules/bulma/sass/components/navbar.sass";
+// @import "../node_modules/bulma/sass/layout/hero.sass";
+// @import "../node_modules/bulma/sass/layout/section.sass";
