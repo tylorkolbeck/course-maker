@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SidebarService } from 'src/app/services/sidebar.service';
-import { SideNavDirection } from '../../services/sidebar-direction.enum';
 
 @Component({
   selector: 'app-note-list',
@@ -11,11 +10,7 @@ import { SideNavDirection } from '../../services/sidebar-direction.enum';
 export class NoteListComponent implements OnInit {
   
   showSideNav$: Observable<boolean>;
-
-  @Input() sidenavTemplateRef: any;
-  @Input() duration: number = 0.25;
-  @Input() navWidth: number = 300;
-  @Input() direction: SideNavDirection = SideNavDirection.LEFT;
+  sideNavWidth: number = 300;
 
   constructor(private sideNavService: SidebarService) {
     this.showSideNav$ = this.sideNavService.getShowNav();
@@ -31,9 +26,9 @@ export class NoteListComponent implements OnInit {
 
   getSideNavBarStyle(showNav: boolean) {
     let navBarStyle: any = {};
-    navBarStyle.transition = this.direction + ' ' + this.duration + 's, visibility ' + this.duration + 's';
-    navBarStyle.width = this.navWidth + 'px';
-    navBarStyle[this.direction] = (showNav ? 0 : (this.navWidth * -1)) + 'px';
+    navBarStyle.transition = 'left ' + 0.25 + 's, visibility ' + 0.25 + 's';
+    navBarStyle.width = this.sideNavWidth + 'px';
+    navBarStyle.left = (this.showSideNav$ ? 0 : (this.sideNavWidth * -1)) + 'px';
     
     return navBarStyle;
   }

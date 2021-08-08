@@ -12,7 +12,6 @@
   height: calc(100vh - 60px);
 
   .note-list {
-    // overflow-y: scroll;
     background: $blue;
     height: 100%;
   }
@@ -27,9 +26,7 @@
     top: 110px;
     background-color: darken($blue-secondary, 2%);
     padding: 6px;
-    // top: 10%;
     width: 30px;
-    // right: -30px;
     border-radius: 0px 6px 6px 0px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     z-index: 100;
@@ -41,7 +38,6 @@
 
     & i {
       color: $green;
-      // transform: rotate(90deg);
     }
   }
 }
