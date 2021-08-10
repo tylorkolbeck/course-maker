@@ -1,20 +1,41 @@
 <div class="container">
-  <form class="box login-form-wrapper">
+  <form class="box login-form-wrapper" [formGroup]="loginForm">
+    <div class="field">
+      <h3 class="title has-text-weight-bold has-text-centered">Login</h3>
+    </div>
     <div class="field">
       <label class="label">Email</label>
       <div class="control">
-        <input class="input" type="email" placeholder="e.g. alex@example.com" />
+        <input
+          class="input"
+          type="email"
+          placeholder="e.g. alex@example.com"
+          formControlName="email"
+        />
+        <p class="help is-danger" *ngIf="email?.errors && email?.touched">
+          Please provide a valid email
+        </p>
       </div>
     </div>
 
     <div class="field">
       <label class="label">Password</label>
       <div class="control">
-        <input class="input" type="password" placeholder="********" />
+        <input
+          class="input"
+          type="password"
+          placeholder="********"
+          formControlName="password"
+        />
       </div>
     </div>
 
-    <button class="button is-primary is-fullwidth is-success">Sign in</button>
+    <button
+      class="button is-primary is-fullwidth is-success"
+      [disabled]="loginForm?.status === 'INVALID'"
+    >
+      Sign in
+    </button>
     <div class="login-form-links">
       <a>Forgot Password? </a>
 

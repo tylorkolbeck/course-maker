@@ -1,10 +1,13 @@
 @import "../../../main-styles.scss";
 
+.register-container {
+  & .register-box {
+    max-width: 500px;
+    margin: 50px auto;
+  }
+}
+
 .register-form-wrapper {
-  max-width: 500px;
-  margin: 50px auto;
-  background: $blue;
-  color: $white;
 }
 
 .register-form-links {

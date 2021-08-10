@@ -84,9 +84,9 @@ body {
   width: 100vw;
   padding: 0;
   margin: 0;
-  max-height: 100vh;
+  // max-height: 100vh;
   max-width: 100vw;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 * {
@@ -128,8 +128,44 @@ input {
 
 button {
   font-weight: bold;
+  transition: all 0.2s;
+
+  &.loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 4px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: button-loading-spinner 1s ease infinite;
+  }
 
   &.is-success {
     color: $button-success-color !important;
+  }
+}
+
+.box.box--dark {
+  background-color: $blue !important;
+  color: $white !important;
+}
+
+form .ng-touched.ng-invalid {
+  border-color: $red !important;
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
   }
 }

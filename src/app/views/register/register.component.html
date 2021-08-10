@@ -1,23 +1,65 @@
-<div class="container">
-  <form class="box register-form-wrapper">
+<div class="register-container">
+  <form
+    *ngIf="!signupComplete"
+    class="box box--dark register-form-wrapper register-box"
+    [formGroup]="signupForm"
+    (ngSubmit)="onRegisterUser()"
+  >
+    <div class="field">
+      <h3 class="title has-text-weight-bold has-text-centered">
+        Create Account
+      </h3>
+    </div>
+
     <div class="field">
       <label class="label">Email</label>
       <div class="control">
-        <input class="input" type="email" placeholder="e.g. alex@example.com" />
+        <input
+          class="input"
+          type="email"
+          formControlName="email"
+          placeholder="e.g. alex@example.com"
+        />
+        <p class="help is-danger" *ngIf="email?.errors && email?.touched">
+          Please provide a valid email
+        </p>
       </div>
     </div>
 
     <div class="field">
       <label class="label">Password</label>
       <div class="control">
-        <input class="input" type="password" placeholder="********" />
+        <input
+          class="input"
+          type="password"
+          formControlName="password"
+          placeholder="********"
+        />
       </div>
+      {{ password?.errors?.min }}
+      <p
+        class="help is-danger"
+        *ngIf="password?.errors?.minlength && password?.touched"
+      >
+        Password must be atleast 6 characters long
+      </p>
     </div>
 
     <div class="field">
       <label class="label">Retype Password</label>
       <div class="control">
-        <input class="input" type="password" placeholder="********" />
+        <input
+          class="input"
+          type="password"
+          formControlName="password2"
+          placeholder="********"
+        />
+        <p
+          class="help is-danger"
+          *ngIf="signupForm.errors?.passDoNotMatch && password2?.touched"
+        >
+          Passwords must match
+        </p>
       </div>
     </div>
 
@@ -28,9 +70,38 @@
       </label>
     </div>
 
-    <button class="button is-primary is-fullwidth is-success">Sign Up</button>
+    <button
+      class="button is-primary is-fullwidth is-success loading"
+      [ngClass]="{ loading: formLoading }"
+      type="submit"
+      [disabled]="signupForm?.status === 'INVALID'"
+    >
+      <span *ngIf="!formLoading">Sign Up</span>
+    </button>
+
+    <div class="field">
+      <p class="help is-danger" *ngIf="resError">
+        {{ resError }}
+      </p>
+    </div>
+
     <div class="register-form-links">
       <a routerLink="/profile/login">Already have an account? Login</a>
     </div>
   </form>
+
+  <div
+    class="box box--dark register-box has-text-centered"
+    *ngIf="signupComplete"
+  >
+    <div class="field">
+      <h3 class="title has-text-weight-bold has-text-centered">
+        You are all signed up!
+      </h3>
+      <p>
+        Please verify your email and then
+        <a routerLink="/profile/login"> login </a>
+      </p>
+    </div>
+  </div>
 </div>
