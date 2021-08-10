@@ -8,7 +8,7 @@ $blue: #232931;
 $blue-lightened: lighten($blue, 10%);
 $blue-secondary: #393e46;
 $green: #4ecca3;
-$white: #eeeeee;
+$white: #dddddd;
 
 // Update Bulma's global variables
 $family-sans-serif: "Noto Sans", sans-serif;
@@ -19,6 +19,7 @@ $link: $green;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
 $text: $white;
+$button-success-color: #363738;
 
 // Update some of Bulma's component variables
 $body-background-color: $blue-secondary;

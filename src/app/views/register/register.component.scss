@@ -1,0 +1,18 @@
+@import "../../../main-styles.scss";
+
+.register-form-wrapper {
+  max-width: 500px;
+  margin: 50px auto;
+  background: $blue;
+  color: $white;
+}
+
+.register-form-links {
+  display: flex;
+  padding-top: 20px;
+  justify-content: space-between;
+
+  & a {
+    display: inline-block;
+  }
+}

@@ -20,6 +20,10 @@
       transition: background-color 0.2s ease-in-out;
       cursor: pointer;
     }
+
+    &.nav-bar-icon-btn-profile {
+      color: $button-success-color;
+    }
   }
 
   .nav-bar-icon-btn-blue {

@@ -23,4 +23,12 @@
 
 .note-card-active {
   background: darken($green, 15%) !important;
+
+  & .note-card-title {
+    color: black;
+  }
+
+  & .note-card-date {
+    color: black;
+  }
 }

@@ -115,4 +115,21 @@ p {
 
 a {
   font-size: 1rem;
+  font-weight: bold;
+}
+
+label {
+  color: $white !important;
+}
+
+input {
+  color: $white !important;
+}
+
+button {
+  font-weight: bold;
+
+  &.is-success {
+    color: $button-success-color !important;
+  }
 }

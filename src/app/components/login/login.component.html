@@ -1,0 +1,24 @@
+<div class="container">
+  <form class="box login-form-wrapper">
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control">
+        <input class="input" type="email" placeholder="e.g. alex@example.com" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control">
+        <input class="input" type="password" placeholder="********" />
+      </div>
+    </div>
+
+    <button class="button is-primary is-fullwidth is-success">Sign in</button>
+    <div class="login-form-links">
+      <a>Forgot Password? </a>
+
+      <a [routerLink]="'/profile/register'">Create Account</a>
+    </div>
+  </form>
+</div>
