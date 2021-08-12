@@ -16,13 +16,15 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { LessonListComponent } from './components/lesson-list/lesson-list.component';
-import { NoteCardComponent } from './components/note-card/note-card.component';
-import { NoteEditorComponent } from './components/note-editor/note-editor.component';
+import { LessonCardComponent } from './components/lesson-card/lesson-card.component';
 import { QuillModule } from 'ngx-quill';
-import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { RegisterComponent } from './views/register/register.component';
 import { SectionCardComponent } from './components/section-card/section-card.component';
+
+// Views
+import { CourseEditorComponent } from './views/course-editor/course-editor.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { RegisterComponent } from './views/register/register.component';
+import { LoginComponent } from './views/login/login.component';
 
 // Initializer
 import { appInitializer } from './_helpers/app.initializer';
@@ -36,8 +38,8 @@ import { AuthService } from '../core/services/Auth/auth.service';
     NavBarComponent,
     MainLayoutComponent,
     LessonListComponent,
-    NoteCardComponent,
-    NoteEditorComponent,
+    LessonCardComponent,
+    CourseEditorComponent,
     LoginComponent,
     DashboardComponent,
     RegisterComponent,

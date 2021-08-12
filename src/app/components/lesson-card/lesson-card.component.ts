@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-note-card',
-  templateUrl: './note-card.component.html',
-  styleUrls: ['./note-card.component.scss'],
+  selector: 'app-lesson-card',
+  templateUrl: './lesson-card.component.html',
+  styleUrls: ['./lesson-card.component.scss'],
 })
-export class NoteCardComponent implements OnInit {
+export class LessonCardComponent implements OnInit {
   @Input() editing: boolean = false;
   @Input() title: string = 'jh';
 

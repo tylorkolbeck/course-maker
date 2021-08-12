@@ -2,7 +2,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SidebarService } from 'src/core/services/Sidebar/sidebar.service';
-import Lesson from '../../shared/Models/Lesson.nodel';
+import Lesson from '../../../core/Models/Lesson.nodel';
 
 // Todo
 // [ ] Setup a service to handle lesson state

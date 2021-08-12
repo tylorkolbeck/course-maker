@@ -5,10 +5,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../core/services/Auth/auth.guard';
 
 // Components
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { LoginComponent } from './views/login/login.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
-import { NoteEditorComponent } from './components/note-editor/note-editor.component';
+import { CourseEditorComponent } from './views/course-editor/course-editor.component';
 import { RegisterComponent } from './views/register/register.component';
 
 const routes: Routes = [
@@ -16,7 +16,7 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: NoteEditorComponent },
+      { path: '', component: CourseEditorComponent },
 
       {
         path: 'dashboard',
