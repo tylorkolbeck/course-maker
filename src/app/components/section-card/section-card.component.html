@@ -1,4 +1,9 @@
 <p class="section-card-container">
-  <span class="section-card-number">{{ sectionNumber }} - </span
-  ><span>{{ sectionTitle }}</span>
+  <span class="section-card-number"
+    >{{ sectionNumber }} - {{ sectionTitle }}</span
+  >
 </p>
+
+<div *ngFor="let lesson of lessons" cdkDropList>
+  <app-note-card [title]="lesson.title"></app-note-card>
+</div>

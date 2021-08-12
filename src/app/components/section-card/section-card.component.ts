@@ -8,8 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SectionCardComponent implements OnInit {
   @Input() sectionNumber: string = '';
   @Input() sectionTitle: string = '';
-
-  constructor() {}
+  @Input() lessons: any[] = [];
 
   ngOnInit(): void {}
 }

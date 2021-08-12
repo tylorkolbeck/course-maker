@@ -7,5 +7,6 @@ export default class Model {
 
   constructor(title: string) {
     this.id = uuidv4();
+    this.title = title;
   }
 }

@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NoteCardComponent implements OnInit {
   @Input() editing: boolean = false;
+  @Input() title: string = 'jh';
 
   constructor() {}
 

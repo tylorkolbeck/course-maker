@@ -19,25 +19,13 @@
     </p>
 
     <!-- Loop over cards and render them here. Give editing decleration of true to which ever card is being edited-->
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card [editing]="true"></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
-    <app-note-card></app-note-card>
+    <div *ngFor="let section of sectionList; let i = index">
+      <app-section-card
+        [sectionNumber]="i.toString()"
+        [sectionTitle]="section.title"
+        [lessons]="section.lessons"
+      >
+      </app-section-card>
+    </div>
   </div>
 </div>

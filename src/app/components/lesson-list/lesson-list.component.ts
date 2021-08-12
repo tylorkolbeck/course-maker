@@ -1,7 +1,12 @@
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SidebarService } from 'src/app/services/sidebar.service';
+import { SidebarService } from 'src/core/services/Sidebar/sidebar.service';
 import Lesson from '../../shared/Models/Lesson.nodel';
+
+// Todo
+// [ ] Setup a service to handle lesson state
+// [ ] Use the service to handle reordering of lessons in drag and drop
 
 @Component({
   selector: 'app-lesson-list',
@@ -11,29 +16,29 @@ import Lesson from '../../shared/Models/Lesson.nodel';
 export class LessonListComponent implements OnInit {
   showSideNav$: Observable<boolean>;
   sideNavWidth: number = 300;
-  noteList = [
+  sectionList = [
     {
-      title: 'Section One',
+      title: 'Course Introduction',
       lessons: [
-        new Lesson('Lesson 1'),
-        new Lesson('Lesson 2'),
-        new Lesson('Lesson 3'),
+        <Lesson>new Lesson('Course Intro'),
+        <Lesson>new Lesson('Course Requirements'),
+        <Lesson>new Lesson('Course Prerequisites'),
       ],
     },
     {
-      title: 'Section Two',
+      title: 'Setting Up Environment',
       lessons: [
-        new Lesson('Lesson 1'),
-        new Lesson('Lesson 2'),
-        new Lesson('Lesson 3'),
+        <Lesson>new Lesson('Installing Angular'),
+        <Lesson>new Lesson('Installing Node'),
+        <Lesson>new Lesson('Installing Note(mac)'),
       ],
     },
     {
-      title: 'Section Three',
+      title: 'Getting Started',
       lessons: [
-        new Lesson('Lesson 1'),
-        new Lesson('Lesson 2'),
-        new Lesson('Lesson 3'),
+        <Lesson>new Lesson('Bootstrapping your first app'),
+        <Lesson>new Lesson('Running your app'),
+        <Lesson>new Lesson('Deployment'),
       ],
     },
   ];

@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from 'src/core/services/Auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -21,11 +21,6 @@ export class RegisterComponent implements OnInit {
   resError: string | null = null;
   formLoading: boolean = false;
   signupComplete: boolean = false;
-
-  /** TODO
-   * Validation:
-   *  password is strong enough
-   */
 
   constructor(
     public formBuilder: FormBuilder,

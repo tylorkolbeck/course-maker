@@ -1,13 +1,15 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-// Interceptor class
-import { AuthInterceptor } from './shared/authconfig.interceptor';
+// Interceptors
+import { AuthInterceptor } from '../core/interceptors/authconfig.interceptor';
+import { AuthErrorInterceptor } from '../core/interceptors/authError.interceptor';
 
-// Route module
+// Modules
 import { AppRoutingModule } from './app-routing.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Components
 import { AppComponent } from './app.component';
@@ -18,13 +20,15 @@ import { NoteCardComponent } from './components/note-card/note-card.component';
 import { NoteEditorComponent } from './components/note-editor/note-editor.component';
 import { QuillModule } from 'ngx-quill';
 import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './views/register/register.component';
+import { SectionCardComponent } from './components/section-card/section-card.component';
 
 // Initializer
 import { appInitializer } from './_helpers/app.initializer';
-import { AuthService } from './shared/auth.service';
-import { SectionCardComponent } from './components/section-card/section-card.component';
+
+// Services
+import { AuthService } from '../core/services/Auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,7 @@ import { SectionCardComponent } from './components/section-card/section-card.com
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    DragDropModule,
     QuillModule.forRoot({
       modules: {
         toolbar: [
@@ -57,6 +62,11 @@ import { SectionCardComponent } from './components/section-card/section-card.com
     }),
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthErrorInterceptor,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

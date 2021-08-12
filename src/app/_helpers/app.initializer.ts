@@ -1,4 +1,4 @@
-import { AuthService } from '../shared/auth.service';
+import { AuthService } from '../../core/services/Auth/auth.service';
 
 export function appInitializer(authService: AuthService) {
   return () =>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from './User';
+import { User } from '../../../app/shared/Models/User';
 import { Observable, throwError, EMPTY } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
@@ -16,15 +16,7 @@ import { environment } from 'src/environments/environment';
  * Following this guide for refresh token handling
  * https://jasonwatmore.com/post/2020/05/22/angular-9-jwt-authentication-with-refresh-tokens
  *
- * Todo:
- *  [x] dont try to refresh the token if there is no token
- *  [ ] test that refresh works by setting a really short time on token
- *  [x] Handle undefined error in refresh token logic
- *  [ ] Stop timeout when logging out
- *  [ ] Create interceptor to log user out on any 401 or 403
  */
-
-// FINISH SETTING UP REFRESH TOKEN LOGIC
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +28,7 @@ export class AuthService {
     'application/json'
   );
   currentUser: User | null = null;
+  profile: any | null = null;
   refreshTokenTimeout: any = null;
 
   constructor(public router: Router, private http: HttpClient) {}
@@ -58,9 +51,17 @@ export class AuthService {
           'refresh_token',
           res.content.tokens.refreshToken.token
         );
+        console.log(res.content.user);
+        let { id, email, fullName } = res.content.user;
+
+        this.currentUser = {
+          _id: id,
+          email,
+          name: fullName,
+        };
 
         this.getUserProfile().subscribe(({ content }) => {
-          this.currentUser = content;
+          this.profile = content;
         });
         this.startRefreshTokenTimer();
 
@@ -79,8 +80,9 @@ export class AuthService {
 
   doLogout() {
     let removeToken = localStorage.removeItem('access_token');
+    this.stopRefreshTokenTimer();
     if (removeToken == null) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/login');
     }
   }
 
@@ -132,6 +134,11 @@ export class AuthService {
     return throwError(message);
   }
 
+  get isLoggedIn(): boolean {
+    let authToken = localStorage.getItem('access_token');
+    return authToken !== null ? true : false;
+  }
+
   private startRefreshTokenTimer() {
     const token = this.getToken();
     // parse json object from base64 encoded jwt token
@@ -149,8 +156,7 @@ export class AuthService {
     }
   }
 
-  get isLoggedIn(): boolean {
-    let authToken = localStorage.getItem('access_token');
-    return authToken !== null ? true : false;
+  private stopRefreshTokenTimer() {
+    clearTimeout(this.refreshTokenTimeout);
   }
 }

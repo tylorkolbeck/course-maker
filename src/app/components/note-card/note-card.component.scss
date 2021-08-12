@@ -9,11 +9,6 @@
   .note-card-title {
     font-size: 1.1rem;
   }
-  .note-card-date {
-    color: lighten($green, 20%);
-    font-size: 0.7rem;
-    font-style: italic;
-  }
 
   &:hover {
     background-color: $blue;
@@ -25,10 +20,6 @@
   background: darken($green, 15%) !important;
 
   & .note-card-title {
-    color: black;
-  }
-
-  & .note-card-date {
     color: black;
   }
 }
