@@ -1,4 +1,4 @@
-# QuickNotes
+# QuickNotes - This is still a work in progress. Updated demo and readme coming soon
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
 
