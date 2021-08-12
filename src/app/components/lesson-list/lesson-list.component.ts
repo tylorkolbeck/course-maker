@@ -1,8 +1,7 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SidebarService } from 'src/core/services/Sidebar/sidebar.service';
-import Lesson from '../../../core/Models/Lesson.nodel';
+import { Lesson } from '../../../core/Models/Course.model';
 
 // Todo
 // [ ] Setup a service to handle lesson state
@@ -20,25 +19,25 @@ export class LessonListComponent implements OnInit {
     {
       title: 'Course Introduction',
       lessons: [
-        <Lesson>new Lesson('Course Intro'),
-        <Lesson>new Lesson('Course Requirements'),
-        <Lesson>new Lesson('Course Prerequisites'),
+        <Lesson>new Lesson('Course Intro', 0),
+        <Lesson>new Lesson('Course Requirements', 1),
+        <Lesson>new Lesson('Course Prerequisites', 2),
       ],
     },
     {
       title: 'Setting Up Environment',
       lessons: [
-        <Lesson>new Lesson('Installing Angular'),
-        <Lesson>new Lesson('Installing Node'),
-        <Lesson>new Lesson('Installing Note(mac)'),
+        <Lesson>new Lesson('Installing Angular', 0),
+        <Lesson>new Lesson('Installing Node', 1),
+        <Lesson>new Lesson('Installing Note(mac)', 2),
       ],
     },
     {
       title: 'Getting Started',
       lessons: [
-        <Lesson>new Lesson('Bootstrapping your first app'),
-        <Lesson>new Lesson('Running your app'),
-        <Lesson>new Lesson('Deployment'),
+        <Lesson>new Lesson('Bootstrapping your first app', 0),
+        <Lesson>new Lesson('Running your app', 1),
+        <Lesson>new Lesson('Deployment', 2),
       ],
     },
   ];

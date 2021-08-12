@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // AuthGuard
-import { AuthGuard } from '../core/services/Auth/auth.guard';
+import { AuthGuard } from '../core/guards/auth.guard';
 
 // Components
 import { DashboardComponent } from './views/dashboard/dashboard.component';
@@ -16,7 +16,7 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: CourseEditorComponent },
+      { path: '', component: CourseEditorComponent, canActivate: [AuthGuard] },
 
       {
         path: 'dashboard',
