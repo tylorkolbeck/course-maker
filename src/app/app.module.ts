@@ -13,7 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
-import { NoteListComponent } from './components/note-list/note-list.component';
+import { LessonListComponent } from './components/lesson-list/lesson-list.component';
 import { NoteCardComponent } from './components/note-card/note-card.component';
 import { NoteEditorComponent } from './components/note-editor/note-editor.component';
 import { QuillModule } from 'ngx-quill';
@@ -30,7 +30,7 @@ import { AuthService } from './shared/auth.service';
     AppComponent,
     NavBarComponent,
     MainLayoutComponent,
-    NoteListComponent,
+    LessonListComponent,
     NoteCardComponent,
     NoteEditorComponent,
     LoginComponent,
