@@ -1,36 +1,60 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  
-  constructor(private formBuilder: FormBuilder) {
+  loginError: string | null = null;
+  formLoading: boolean = false;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.formBuilder.group({
-      email: new FormControl('', [
+      email: new FormControl('tylor.kolbeck@gmail.com', [
         Validators.required,
-        Validators.email
+        Validators.email,
       ]),
-      password: new FormControl('', [
-        Validators.required
-      ])
-    })
-   }
-
-   onLogin() {
-     console.log("Login")
-   }
-
-   get email() { return this.loginForm.get('email') }
-   get password() { return this.loginForm.get('password')}
-
-
-
-  ngOnInit(): void {
+      password: new FormControl('12341234', [Validators.required]),
+    });
   }
 
+  onLogin() {
+    this.formLoading = true;
+    this.loginError = null;
+    this.authService.signIn(this.email?.value, this.password?.value).subscribe(
+      (res) => {
+        if (res === 'success') {
+          this.formLoading = false;
+          this.router.navigateByUrl('/');
+        }
+      },
+      (error: any) => {
+        this.formLoading = false;
+        this.loginError = error.message;
+      }
+    );
+  }
+
+  get email() {
+    return this.loginForm.get('email');
+  }
+  get password() {
+    return this.loginForm.get('password');
+  }
+
+  ngOnInit(): void {}
 }

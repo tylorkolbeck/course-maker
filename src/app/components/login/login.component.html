@@ -1,5 +1,9 @@
 <div class="container">
-  <form class="box login-form-wrapper" [formGroup]="loginForm">
+  <form
+    class="box login-form-wrapper"
+    [formGroup]="loginForm"
+    (ngSubmit)="onLogin()"
+  >
     <div class="field">
       <h3 class="title has-text-weight-bold has-text-centered">Login</h3>
     </div>
@@ -33,13 +37,17 @@
     <button
       class="button is-primary is-fullwidth is-success"
       [disabled]="loginForm?.status === 'INVALID'"
+      type="submit"
+      [ngClass]="{ loading: formLoading }"
     >
-      Sign in
+      <span *ngIf="!formLoading">Login</span>
     </button>
+    <p class="help is-danger" *ngIf="loginError">
+      {{ loginError }}
+    </p>
     <div class="login-form-links">
       <a>Forgot Password? </a>
-
-      <a [routerLink]="'/profile/register'">Create Account</a>
+      <a [routerLink]="'/register'">Create Account</a>
     </div>
   </form>
 </div>
