@@ -10,9 +10,7 @@ export class NoteCardComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    // console.log(this.editing);
-  }
+  ngOnInit(): void {}
 
   getActiveClass() {
     if (this.editing) {
