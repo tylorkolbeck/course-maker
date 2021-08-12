@@ -24,6 +24,7 @@ import { RegisterComponent } from './views/register/register.component';
 // Initializer
 import { appInitializer } from './_helpers/app.initializer';
 import { AuthService } from './shared/auth.service';
+import { SectionCardComponent } from './components/section-card/section-card.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AuthService } from './shared/auth.service';
     LoginComponent,
     DashboardComponent,
     RegisterComponent,
+    SectionCardComponent,
   ],
   imports: [
     BrowserModule,
