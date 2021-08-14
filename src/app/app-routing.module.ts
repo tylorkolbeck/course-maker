@@ -17,7 +17,6 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       { path: '', component: CourseEditorComponent, canActivate: [AuthGuard] },
-
       {
         path: 'dashboard',
         component: DashboardComponent,

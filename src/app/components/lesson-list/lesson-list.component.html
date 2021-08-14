@@ -2,11 +2,13 @@
   class="note-list-container"
   [ngClass]="{ 'side-nav-bar-collapsed': !(showSideNav$ | async) }"
 >
+  <!-- Toggle UI to hide and show lesson list -->
   <div class="note-list-toggle" (click)="onSidebarToggle()">
     <i class="fas fa-bars"></i>
   </div>
 
   <div class="note-list">
+    <!-- Search Input -->
     <p class="control has-icons-left">
       <input
         class="input note-list-search-input"
@@ -18,12 +20,12 @@
       </span>
     </p>
 
-    <!-- Loop over cards and render them here. Give editing decleration of true to which ever card is being edited-->
-    <div *ngFor="let section of sectionList; let i = index">
+    <!-- List of section and their lessons -->
+    <div *ngFor="let section of course.sections; let i = index">
       <app-section-card
-        [sectionNumber]="i.toString()"
+        [sectionNumber]="(i + 1).toString()"
         [sectionTitle]="section.title"
-        [lessons]="section.lessons"
+        [sectionId]="section.id"
       >
       </app-section-card>
     </div>

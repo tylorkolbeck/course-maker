@@ -37,7 +37,7 @@ export class Course {
 export class Section {
   id: string;
   title: string;
-  lessons: Lesson[] | [];
+  lessons?: Lesson[] | [];
   order: number;
 
   constructor(title: string, lessons: Lesson[], order: number) {

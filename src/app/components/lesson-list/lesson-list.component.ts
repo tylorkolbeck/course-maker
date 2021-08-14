@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
+import { CourseService } from 'src/core/services/Course/course.service';
 import { SidebarService } from 'src/core/services/Sidebar/sidebar.service';
-import { Lesson } from '../../../core/Models/Course.model';
+import { Course, Lesson, Section } from '../../../core/Models/Course.model';
 
 // Todo
 // [ ] Setup a service to handle lesson state
@@ -15,35 +21,14 @@ import { Lesson } from '../../../core/Models/Course.model';
 export class LessonListComponent implements OnInit {
   showSideNav$: Observable<boolean>;
   sideNavWidth: number = 300;
-  sectionList = [
-    {
-      title: 'Course Introduction',
-      lessons: [
-        <Lesson>new Lesson('Course Intro', 0),
-        <Lesson>new Lesson('Course Requirements', 1),
-        <Lesson>new Lesson('Course Prerequisites', 2),
-      ],
-    },
-    {
-      title: 'Setting Up Environment',
-      lessons: [
-        <Lesson>new Lesson('Installing Angular', 0),
-        <Lesson>new Lesson('Installing Node', 1),
-        <Lesson>new Lesson('Installing Note(mac)', 2),
-      ],
-    },
-    {
-      title: 'Getting Started',
-      lessons: [
-        <Lesson>new Lesson('Bootstrapping your first app', 0),
-        <Lesson>new Lesson('Running your app', 1),
-        <Lesson>new Lesson('Deployment', 2),
-      ],
-    },
-  ];
+  course: Course;
 
-  constructor(private sideNavService: SidebarService) {
+  constructor(
+    private sideNavService: SidebarService,
+    private courseService: CourseService
+  ) {
     this.showSideNav$ = this.sideNavService.getShowNav();
+    this.course = this.courseService.getCourse();
   }
 
   ngOnInit(): void {

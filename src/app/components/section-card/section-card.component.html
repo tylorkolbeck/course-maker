@@ -1,9 +1,16 @@
-<p class="section-card-container">
-  <span class="section-card-number"
-    >{{ sectionNumber }} - {{ sectionTitle }}</span
-  >
-</p>
+<div class="section-card-title">{{ sectionTitle }}</div>
 
-<div *ngFor="let lesson of lessons" cdkDropList>
-  <app-lesson-card [title]="lesson.title"></app-lesson-card>
+<div cdkDropList (cdkDropListDropped)="drop($event)">
+  <div
+    class="lesson-card-container"
+    *ngFor="let lesson of lessons; let i = index"
+    cdkDrag
+  >
+    <div class="lesson-card-placeholder" *cdkDragPlaceholder></div>
+    <div cdkDragHandle class="drag-handle">
+      <i class="fas fa-ellipsis-v"></i>
+    </div>
+
+    <p>{{ lesson.title }}</p>
+  </div>
 </div>

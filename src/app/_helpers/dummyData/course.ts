@@ -104,6 +104,56 @@ const course: Course = {
         },
       ],
     },
+    {
+      id: '5',
+      title: 'Section Five',
+      order: 5,
+      lessons: [
+        {
+          id: '1',
+          order: 1,
+          title: 'Section Five - Lesson One',
+          body: '<p>Section Five - Lesson One</p>',
+        },
+        {
+          id: '2',
+          order: 2,
+          title: 'Section Five - Lesson Two',
+          body: '<p>Section Five - Lesson Two</p>',
+        },
+        {
+          id: '3',
+          order: 3,
+          title: 'Section Five - Lesson Three',
+          body: '<p>Section Five - Lesson Three</p>',
+        },
+      ],
+    },
+    {
+      id: '6',
+      title: 'Section Six',
+      order: 4,
+      lessons: [
+        {
+          id: '1',
+          order: 1,
+          title: 'Section Six - Lesson One',
+          body: '<p>Section Six - Lesson One</p>',
+        },
+        {
+          id: '2',
+          order: 2,
+          title: 'Section Six - Lesson Two',
+          body: '<p>Section Six - Lesson Two</p>',
+        },
+        {
+          id: '3',
+          order: 3,
+          title: 'Section Six - Lesson Three',
+          body: '<p>Section Six - Lesson Three</p>',
+        },
+      ],
+    },
   ],
 };
 

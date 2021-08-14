@@ -16,7 +16,6 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { LessonListComponent } from './components/lesson-list/lesson-list.component';
-import { LessonCardComponent } from './components/lesson-card/lesson-card.component';
 import { QuillModule } from 'ngx-quill';
 import { SectionCardComponent } from './components/section-card/section-card.component';
 
@@ -38,7 +37,6 @@ import { AuthService } from '../core/services/Auth/auth.service';
     NavBarComponent,
     MainLayoutComponent,
     LessonListComponent,
-    LessonCardComponent,
     CourseEditorComponent,
     LoginComponent,
     DashboardComponent,
