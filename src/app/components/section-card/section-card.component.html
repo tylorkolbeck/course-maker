@@ -1,16 +1,36 @@
-<div class="section-card-title">{{ sectionTitle }}</div>
-
-<div cdkDropList (cdkDropListDropped)="drop($event)">
-  <div
-    class="lesson-card-container"
-    *ngFor="let lesson of lessons; let i = index"
-    cdkDrag
+<cdk-accordion>
+  <cdk-accordion-item
+    #accordionItem="cdkAccordionItem"
+    role="button"
+    [expanded]="true"
+    [attr.aria-expanded]="accordionItem.expanded"
+    [attr.id]="'accordion-header-' + sectionId"
+    [attr.aria-controls]="'accordion-body-' + sectionId"
   >
-    <div class="lesson-card-placeholder" *cdkDragPlaceholder></div>
-    <div cdkDragHandle class="drag-handle">
-      <i class="fas fa-ellipsis-v"></i>
+    <div class="section-card-title">
+      {{ sectionTitle }}
+      <span (click)="accordionItem.toggle()">
+        <i *ngIf="accordionItem.expanded" class="fas fa-chevron-down"></i>
+        <i *ngIf="!accordionItem.expanded" class="fas fa-chevron-up"></i>
+      </span>
     </div>
 
-    <p>{{ lesson.title }}</p>
-  </div>
-</div>
+    <div cdkDropList (cdkDropListDropped)="drop($event)">
+      <div
+        class="lesson-card-container"
+        *ngFor="let lesson of lessons; let i = index"
+        role="region"
+        [style.display]="accordionItem.expanded ? '' : 'none'"
+        [attr.id]="'accordion-body-' + sectionId"
+        cdkDrag
+      >
+        <div class="lesson-card-placeholder" *cdkDragPlaceholder></div>
+        <div cdkDragHandle class="drag-handle">
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+
+        <p>{{ lesson.title }}</p>
+      </div>
+    </div>
+  </cdk-accordion-item>
+</cdk-accordion>

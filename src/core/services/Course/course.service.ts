@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Course, Lesson, Section } from 'src/core/Models/Course.model.js';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import deepClone from '../../../app/_helpers/deepClone.js';
-import { moveItemInArray } from '@angular/cdk/drag-drop';
-import { fromJS } from 'immutable';
 
 // ** Dummy Data **
 import course from '../../../app/_helpers/dummyData/course';

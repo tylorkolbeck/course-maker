@@ -8,7 +8,8 @@ import { AuthErrorInterceptor } from '../core/interceptors/authError.interceptor
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropModule as CdkDragDropModule } from '@angular/cdk/drag-drop';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Components
@@ -49,7 +50,8 @@ import { AuthService } from '../core/services/Auth/auth.service';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    DragDropModule,
+    CdkDragDropModule,
+    CdkAccordionModule,
     QuillModule.forRoot({
       modules: {
         toolbar: [

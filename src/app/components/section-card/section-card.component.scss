@@ -3,6 +3,14 @@
 .section-card-title {
   font-weight: bold;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(#eee, 0.2);
+
+  & i:hover {
+    cursor: pointer;
+    color: $green;
+  }
 }
 
 .lesson-card-container {
@@ -11,7 +19,6 @@
   padding: 10px;
   position: relative;
   display: flex;
-  // justify-content: space-between;
 
   .lesson-card-title {
     font-size: 1.1rem;

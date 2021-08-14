@@ -9,6 +9,9 @@
   transition: width 0.1s ease-in-out;
   width: 300px;
   max-height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
+  background: $blue;
+  border-right: 1px solid rgba(#eee, 0.2);
 
   .note-list {
     background: $blue;
