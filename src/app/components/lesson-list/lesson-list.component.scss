@@ -3,6 +3,7 @@
 .note-list-container {
   position: relative;
   overflow-y: scroll;
+  // overflow-x: clip;
   -webkit-transition: width 0.1s ease-in-out;
   -moz-transition: width 0.1s ease-in-out;
   -o-transition: width 0.1s ease-in-out;
@@ -16,6 +17,28 @@
   .note-list {
     background: $blue;
     height: 100%;
+
+    .section-controls {
+      display: flex;
+      position: sticky;
+      top: 0;
+      background: lighten($blue, 10%);
+      align-items: center;
+      justify-content: space-evenly;
+      margin: 0;
+      padding: 6px 0px;
+      // border: 1px solid rgba($white, 0.3);
+
+      & .divider {
+        height: 20px;
+        width: 1px;
+        border-right: 1px solid rgba($white, 0.3);
+      }
+
+      button {
+        background: $blue !important;
+      }
+    }
   }
 
   .note-list-search-input {

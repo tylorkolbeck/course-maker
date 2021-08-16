@@ -54,9 +54,14 @@ export class Lesson {
   body: string = '';
   order: number;
 
-  constructor(title: string, order: number) {
+  constructor(
+    title: string,
+    order: number,
+    body: string = 'Add you lesson content here...'
+  ) {
     this.id = uuidv4();
     this.title = title;
     this.order = order;
+    this.body = body;
   }
 }

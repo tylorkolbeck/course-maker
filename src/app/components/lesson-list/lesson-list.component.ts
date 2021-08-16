@@ -6,8 +6,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CourseService } from 'src/core/services/Course/course.service';
-import { SidebarService } from 'src/core/services/Sidebar/sidebar.service';
+import { CourseService } from '../../../core/services/Course/course.service';
+import { SidebarService } from '../../../core/services/Sidebar/sidebar.service';
 import { Course, Lesson, Section } from '../../../core/Models/Course.model';
 
 // Todo
@@ -34,10 +34,33 @@ export class LessonListComponent implements OnInit {
 
   ngOnInit(): void {
     this.showSideNav$ = this.sideNavService.getShowNav();
+
+    this.courseService.courseChanged.subscribe((course) => {
+      this.sections = course.sections;
+    });
   }
 
   onSidebarToggle() {
     this.sideNavService.toggleNavState();
+  }
+
+  onAddSection() {
+    const newSectionId = this.courseService.addSection();
+    tryScrollToNewElement(10, 'section-' + newSectionId);
+
+    // This function makes sure that the element is in the dom before trying to scroll to it
+    // if the element does not exsist after the given amount of framerate trys then just give up,
+    // its not the important
+    function tryScrollToNewElement(trys: number, elId: string) {
+      let sectionEl = document.getElementById(elId);
+
+      trys--;
+      if (!sectionEl && trys > 0) {
+        window.requestAnimationFrame(() => tryScrollToNewElement(trys, elId));
+      } else if (sectionEl) {
+        sectionEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   }
 
   getSideNavBarStyle(showNav: boolean) {

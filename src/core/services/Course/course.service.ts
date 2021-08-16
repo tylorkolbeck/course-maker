@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-// @ts-ignore: Unreachable code error
-import { Course, Lesson, Section } from 'src/core/Models/Course.model.js';
+
+import { Course, Lesson, Section } from '../../Models/Course.model';
 import { Subject, BehaviorSubject, ReplaySubject } from 'rxjs';
 // @ts-ignore: Unreachable code error
 import cloneDeep from 'lodash.clonedeep';
@@ -15,21 +15,25 @@ import course from '../../../app/_helpers/dummyData/course';
 })
 export class CourseService {
   // Set up the observable
-  courseChanged = new Subject<Course>();
-  lessonBeingEdited: Subject<Lesson> = new ReplaySubject<Lesson>();
+  public courseChanged: Subject<Course> = new Subject<Course>();
+  public lessonBeingEdited: Subject<Lesson> = new ReplaySubject<Lesson>();
 
-  private course: any;
+  private _course: any;
 
   constructor() {
     // Assign dummy data
     this.fetchCourseData();
+  }
 
-    // for (let i = 0; i < this.course.sections.length; i++) {
-    //   if (this.course.sections[i].lessons.length) {
-    //     this.lessonBeingEdited = this.course.sections[i].lessons[0];
-    //     return;
-    //   }
-    // }
+  set course(course: Course) {
+    this._course = course;
+  }
+
+  get course() {
+    this._course.sections.sort((a: Section, b: Section) => {
+      return a.order - b.order;
+    });
+    return this._course;
   }
 
   fetchCourseData() {
@@ -40,7 +44,7 @@ export class CourseService {
     let section = this.course.sections.find(
       (section: Section) => section.id === sectionId
     );
-    let lesson = section.lessons.find(
+    let lesson = section?.lessons?.find(
       (lesson: Lesson) => lesson.id === lessonId
     );
     this.lessonBeingEdited.next(lesson);
@@ -52,21 +56,46 @@ export class CourseService {
     sections.sort((a: Section, b: Section) => {
       return a.order - b.order;
     });
+
     return sections;
   }
 
+  addSection() {
+    const newCourse = cloneDeep(this.course);
+
+    const newLesson = new Lesson('New Lesson', 0);
+    const newSection = new Section(
+      'New Section',
+      [newLesson],
+      this.course.sections.length + 1
+    );
+
+    newCourse.sections.push(newSection);
+
+    this.courseChanged.next(newCourse);
+    this.course = newCourse;
+    this.lessonBeingEdited.next(newLesson);
+
+    return newSection.id;
+  }
+
   getSectionLessons(id: string) {
-    return cloneDeep(
-      this.course.sections.find((section: Section) => section.id === id).lessons
-    ).sort((a: Lesson, b: Lesson) => a.order - b.order);
+    let courseClone = cloneDeep(this.course);
+
+    let sectionToGet = courseClone.sections.find(
+      (section: Section) => section.id === id
+    );
+    let lessonsToGet;
+
+    if (sectionToGet) {
+      lessonsToGet = sectionToGet.lessons;
+      return lessonsToGet.sort((a: Lesson, b: Lesson) => a.order - b.order);
+    }
   }
 
-  updateCourse() {
-    this.course.sections = this.course.sections.slice(0, 1);
-    this.courseChanged.next(this.course);
-  }
-
+  // Reorder Functions
   updateLessonsOrderInSection(id: string, lessons: Lesson[]) {
+    const courseClone = cloneDeep(this.course);
     interface lessonOrderUpdatePayload {
       sectionId: string;
       lessons: { id: string; order: number }[];
@@ -77,24 +106,26 @@ export class CourseService {
       lessons: [],
     };
 
-    this.course = course.sections.map((section: Section, index: number) => {
-      if (section.id === id) {
-        lessonsReorderPayload.sectionId = id;
-        section.lessons = lessons.map((lesson: Lesson, index: number) => {
-          lesson.order = index;
-          lessonsReorderPayload.lessons.push({
-            id: lesson.id,
-            order: index,
+    this.course = courseClone.sections.map(
+      (section: Section, index: number) => {
+        if (section.id === id) {
+          lessonsReorderPayload.sectionId = id;
+          section.lessons = lessons.map((lesson: Lesson, index: number) => {
+            lesson.order = index;
+            lessonsReorderPayload.lessons.push({
+              id: lesson.id,
+              order: index,
+            });
+
+            return { ...lesson };
           });
+        }
 
-          return { ...lesson };
-        });
+        return {
+          ...section,
+        };
       }
-
-      return {
-        ...section,
-      };
-    });
+    );
     this.course = course;
 
     console.log('PAYLOAD TO UPDATE LESSONS ORDER', lessonsReorderPayload);
@@ -111,7 +142,7 @@ export class CourseService {
       sections: [],
     };
 
-    this.course = sections.map((section: Section, index: number) => {
+    this.course.sections = sections.map((section: Section, index: number) => {
       section.order = index;
       sectionsReorderPayload.sections.push({
         id: section.id,

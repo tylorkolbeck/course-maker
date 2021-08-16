@@ -9,7 +9,7 @@
 
   <div class="note-list">
     <!-- Search Input -->
-    <p class="control has-icons-left">
+    <!-- <p class="control has-icons-left">
       <input
         class="input note-list-search-input"
         type="text"
@@ -18,7 +18,12 @@
       <span class="icon is-small is-left">
         <i class="fas fa-search"></i>
       </span>
-    </p>
+    </p> -->
+    <div class="buttons section-controls">
+      <a class="is-success" (click)="onAddSection()">+ Section</a>
+      <div class="divider"></div>
+      <a class="is-success">+ Lesson</a>
+    </div>
 
     <!-- List of section and their lessons -->
     <div
@@ -36,6 +41,7 @@
           [sectionNumber]="(i + 1).toString()"
           [sectionTitle]="section.title"
           [sectionId]="section.id"
+          id="section-{{ section.id }}"
         >
           <div cdkDragHandle class="drag-handle">
             <i class="fas fa-ellipsis-v"></i>
