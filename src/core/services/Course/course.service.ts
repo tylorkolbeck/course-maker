@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 // @ts-ignore: Unreachable code error
 import { Course, Lesson, Section } from 'src/core/Models/Course.model.js';
-import { Subject } from 'rxjs';
-import deepClone from '../../../app/_helpers/deepClone.js';
+import { Subject, BehaviorSubject, ReplaySubject } from 'rxjs';
 // @ts-ignore: Unreachable code error
 import cloneDeep from 'lodash.clonedeep';
 
@@ -17,16 +16,34 @@ import course from '../../../app/_helpers/dummyData/course';
 export class CourseService {
   // Set up the observable
   courseChanged = new Subject<Course>();
+  lessonBeingEdited: Subject<Lesson> = new ReplaySubject<Lesson>();
 
   private course: any;
 
   constructor() {
     // Assign dummy data
     this.fetchCourseData();
+
+    // for (let i = 0; i < this.course.sections.length; i++) {
+    //   if (this.course.sections[i].lessons.length) {
+    //     this.lessonBeingEdited = this.course.sections[i].lessons[0];
+    //     return;
+    //   }
+    // }
   }
 
   fetchCourseData() {
     this.course = cloneDeep(course);
+  }
+
+  setLessonBeingEdited(sectionId: string, lessonId: string) {
+    let section = this.course.sections.find(
+      (section: Section) => section.id === sectionId
+    );
+    let lesson = section.lessons.find(
+      (lesson: Lesson) => lesson.id === lessonId
+    );
+    this.lessonBeingEdited.next(lesson);
   }
 
   getSections() {
@@ -78,6 +95,7 @@ export class CourseService {
         ...section,
       };
     });
+    this.course = course;
 
     console.log('PAYLOAD TO UPDATE LESSONS ORDER', lessonsReorderPayload);
   }
@@ -102,6 +120,8 @@ export class CourseService {
 
       return { ...section };
     });
+
+    this.course = course;
 
     console.log('PAYLOAD TO UPDATE SECTIONS ORDER', sectionsReorderPayload);
   }

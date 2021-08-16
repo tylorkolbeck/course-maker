@@ -1,12 +1,12 @@
 <div style="display: flex">
   <app-lesson-list></app-lesson-list>
-  <div class="editor-container">
+  <div class="editor-container" *ngIf="lesson">
     <div class="editor-header">
       <input
         class="input note-list-search-input"
         type="text"
         placeholder="Title"
-        value="Lesson Title"
+        [value]="lesson?.title"
       />
 
       <div class="editor-header-date">
@@ -19,6 +19,7 @@
         </div>
       </div>
     </div>
-    <quill-editor></quill-editor>
+
+    <quill-editor [ngModel]="lesson?.body"></quill-editor>
   </div>
 </div>

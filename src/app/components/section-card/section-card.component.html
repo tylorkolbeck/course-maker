@@ -23,6 +23,10 @@
     <div cdkDropList (cdkDropListDropped)="drop($event)">
       <div
         class="lesson-card-container"
+        [ngClass]="{
+          'lesson-card-container-active':
+            lessonBeingEditedId === lesson.id ? true : false
+        }"
         *ngFor="let lesson of lessons; let i = index"
         role="region"
         [style.display]="accordionItem.expanded ? '' : 'none'"
@@ -34,7 +38,9 @@
           <i class="fas fa-ellipsis-v"></i>
         </div>
 
-        <p class="lesson-card-title">{{ lesson.title }}</p>
+        <p class="lesson-card-title" (click)="onEditLesson(lesson.id)">
+          {{ lesson.title }}
+        </p>
       </div>
     </div>
   </cdk-accordion-item>
