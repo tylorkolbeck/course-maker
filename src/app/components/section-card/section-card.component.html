@@ -7,8 +7,13 @@
     [attr.id]="'accordion-header-' + sectionId"
     [attr.aria-controls]="'accordion-body-' + sectionId"
   >
-    <div class="section-card-title">
-      {{ sectionTitle }}
+    <div class="section-card-container">
+      <div class="section-card-title">
+        <ng-content></ng-content>
+        <p style="margin-left: 10px">
+          {{ sectionTitle }}
+        </p>
+      </div>
       <span (click)="accordionItem.toggle()">
         <i *ngIf="accordionItem.expanded" class="fas fa-chevron-down"></i>
         <i *ngIf="!accordionItem.expanded" class="fas fa-chevron-up"></i>
@@ -29,7 +34,7 @@
           <i class="fas fa-ellipsis-v"></i>
         </div>
 
-        <p>{{ lesson.title }}</p>
+        <p class="lesson-card-title">{{ lesson.title }}</p>
       </div>
     </div>
   </cdk-accordion-item>

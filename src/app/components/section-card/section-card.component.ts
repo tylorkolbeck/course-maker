@@ -22,6 +22,7 @@ export class SectionCardComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.lessons, event.previousIndex, event.currentIndex);
+    console.log(this.lessons);
     this.courseService.updateLessonsOrderInSection(
       this.sectionId,
       this.lessons

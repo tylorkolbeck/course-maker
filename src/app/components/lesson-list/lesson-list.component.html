@@ -21,13 +21,27 @@
     </p>
 
     <!-- List of section and their lessons -->
-    <div *ngFor="let section of course.sections; let i = index">
-      <app-section-card
-        [sectionNumber]="(i + 1).toString()"
-        [sectionTitle]="section.title"
-        [sectionId]="section.id"
+    <div
+      cdkDropList
+      (cdkDropListDropped)="drop($event)"
+      class="lesson-list-lesson-wrapper"
+    >
+      <div
+        class="section-box"
+        *ngFor="let section of sections; let i = index"
+        cdkDrag
       >
-      </app-section-card>
+        <div class="section-card-placeholder" *cdkDragPlaceholder></div>
+        <app-section-card
+          [sectionNumber]="(i + 1).toString()"
+          [sectionTitle]="section.title"
+          [sectionId]="section.id"
+        >
+          <div cdkDragHandle class="drag-handle">
+            <i class="fas fa-ellipsis-v"></i>
+          </div>
+        </app-section-card>
+      </div>
     </div>
   </div>
 </div>

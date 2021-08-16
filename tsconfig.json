@@ -21,7 +21,8 @@
     "allowJs": true,
     "lib": [
       "es2018",
-      "dom"
+      "dom",
+      "dom.iterable"
     ]
   },
   "angularCompilerOptions": {

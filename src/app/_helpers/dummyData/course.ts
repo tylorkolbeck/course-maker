@@ -5,31 +5,6 @@ const course: Course = {
   title: 'Course Title',
   sections: [
     {
-      id: '1',
-      title: 'Section One',
-      order: 1,
-      lessons: [
-        {
-          id: '1',
-          order: 1,
-          title: 'Section One - Lesson One',
-          body: '<p>Section One - Lesson One</p>',
-        },
-        {
-          id: '2',
-          order: 2,
-          title: 'Section One - Lesson Two',
-          body: '<p>Section One - Lesson Two</p>',
-        },
-        {
-          id: '3',
-          order: 3,
-          title: 'Section One - Lesson Three',
-          body: '<p>Section One - Lesson Three</p>',
-        },
-      ],
-    },
-    {
       id: '2',
       title: 'Section Two',
       order: 2,
@@ -54,6 +29,33 @@ const course: Course = {
         },
       ],
     },
+    {
+      id: '1',
+      title: 'Section One',
+      order: 1,
+      lessons: [
+        {
+          id: '3',
+          order: 3,
+          title: 'Section One - Lesson Three',
+          body: '<p>Section One - Lesson Three</p>',
+        },
+
+        {
+          id: '2',
+          order: 2,
+          title: 'Section One - Lesson Two',
+          body: '<p>Section One - Lesson Two</p>',
+        },
+        {
+          id: '1',
+          order: 1,
+          title: 'Section One - Lesson One',
+          body: '<p>Section One - Lesson One</p>',
+        },
+      ],
+    },
+
     {
       id: '3',
       title: 'Section Three',
