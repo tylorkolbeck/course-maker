@@ -8,7 +8,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 
 /** Following this guide for auth service
  * https://www.positronx.io/angular-jwt-user-authentication-tutorial/
@@ -34,7 +34,7 @@ export class AuthService {
   constructor(public router: Router, private http: HttpClient) {}
 
   signIn(email: string, password: string): Observable<any> {
-    let apiUrl = `${this.apiEndpoint}/auth/login`;
+    let apiUrl = `${this.apiEndpoint}/login`;
     const payload = {
       email,
       password,
@@ -51,7 +51,6 @@ export class AuthService {
           'refresh_token',
           res.content.tokens.refreshToken.token
         );
-        console.log(res.content.user);
         let { id, email, fullName } = res.content.user;
 
         this.currentUser = {
@@ -60,9 +59,10 @@ export class AuthService {
           name: fullName,
         };
 
-        this.getUserProfile().subscribe(({ content }) => {
-          this.profile = content;
-        });
+        // this.getUserProfile().subscribe(({ content }) => {
+        //   this.profile = content;
+        // });
+
         this.startRefreshTokenTimer();
 
         return 'success';
@@ -91,7 +91,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    let apiUrl = `${this.apiEndpoint}/auth/refresh`;
+    let apiUrl = `${this.apiEndpoint}/refresh`;
     let refreshtoken = localStorage.getItem('refresh_token');
 
     const httpOptions = {
@@ -128,7 +128,8 @@ export class AuthService {
       // client side error
       message = error.message;
     } else {
-      message = error.error.message;
+      console.log(error);
+      message = error;
     }
 
     return throwError(message);

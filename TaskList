@@ -1,1 +1,5 @@
 [ ] Set required password strength validator in register component
+[ ] Add ability to delete section
+      [ ] Confirm delete ui before delete
+[ ] Add ability to add section to lesson
+[ ] Scroll to newely created section

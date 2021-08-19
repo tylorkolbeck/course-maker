@@ -118,6 +118,11 @@ a {
   font-weight: bold;
 }
 
+p.is-danger {
+  font-size: 1rem !important;
+  font-weight: bold !important;
+}
+
 label {
   color: $white !important;
 }

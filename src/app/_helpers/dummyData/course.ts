@@ -3,6 +3,7 @@ import { Course } from '../../../core/Models/Course.model';
 const course: Course = {
   id: '1',
   title: 'Course Title',
+  createdAt: new Date(),
   sections: [
     {
       id: '2',

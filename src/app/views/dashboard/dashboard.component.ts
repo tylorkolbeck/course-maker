@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/core/services/Auth/auth.service';
+import { Course } from '../../../core/Models/Course.model';
+import { AuthService } from '../../../core/services/Auth/auth.service';
+import { CourseService } from '../../../core/services/Course/course.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +10,21 @@ import { AuthService } from 'src/core/services/Auth/auth.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  courseApiUrl: string = environment.courseApiUrl;
+  courses: Course[] = [];
 
-  ngOnInit(): void {}
+  constructor(
+    private authService: AuthService,
+    private courseService: CourseService
+  ) {}
+
+  ngOnInit(): void {
+    this.courseService.fetchCourses().subscribe((res: any) => {
+      if (res?.content?.courses) {
+        this.courses = res.content.courses;
+      }
+    });
+  }
 
   onLogout() {
     this.authService.doLogout();

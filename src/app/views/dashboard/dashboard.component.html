@@ -1,6 +1,15 @@
 <div class="container dashboard-container">
   <div class="box box--dark">
-    <h3 class="title has-text-weight-bold">User Settings</h3>
+    <!-- <h3 class="title has-text-weight-bold">User Dashboard</h3> -->
+    <h4>Courses</h4>
+    <div *ngFor="let course of courses">
+      <a [routerLink]="['/course', course.id]">
+        <p>{{ course?.title }}</p>
+      </a>
+      <p>{{ course?.createdAt | date }}</p>
+    </div>
+
+    <h4>Profile Settings</h4>
     <button class="button is-danger" (click)="onLogout()">Logout</button>
   </div>
 </div>

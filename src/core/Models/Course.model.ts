@@ -26,11 +26,14 @@ export class Course {
   id: string;
   title: string;
   sections: Section[] | [];
+  createdAt: Date;
+  updatedAt?: Date;
 
   constructor(title: string, sections: Section[]) {
     this.id = uuidv4();
     this.title = title;
     this.sections = sections;
+    this.createdAt = new Date();
   }
 }
 

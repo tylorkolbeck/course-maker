@@ -1,10 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import {
-  Component,
-  ComponentFactoryResolver,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CourseService } from '../../../core/services/Course/course.service';
 import { SidebarService } from '../../../core/services/Sidebar/sidebar.service';
@@ -22,14 +17,13 @@ import { Course, Lesson, Section } from '../../../core/Models/Course.model';
 export class LessonListComponent implements OnInit {
   showSideNav$: Observable<boolean>;
   sideNavWidth: number = 300;
-  sections: Section[];
+  sections: Section[] | [] = [];
 
   constructor(
     private sideNavService: SidebarService,
     private courseService: CourseService
   ) {
     this.showSideNav$ = this.sideNavService.getShowNav();
-    this.sections = this.courseService.getSections();
   }
 
   ngOnInit(): void {

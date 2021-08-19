@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  authApiUrl: 'http://localhost:3001/api/v1',
+  authApiUrl: 'http://localhost:3001/api/v1/auth',
+  courseApiUrl: 'http://localhost:3001/api/v1/private/courses',
+  privateApiUrl: 'http://localhost:3001/api/v1/private',
 };
 
 /*

@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/core/services/Auth/auth.service';
+import { AuthService } from '../../../core/services/Auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -24,12 +24,18 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
-      email: new FormControl('tylor.kolbeck@gmail.com', [
+      email: new FormControl('test@test.com', [
         Validators.required,
         Validators.email,
       ]),
-      password: new FormControl('12341234', [Validators.required]),
+      password: new FormControl('password', [Validators.required]),
     });
+  }
+
+  ngOnInit(): void {
+    if (localStorage.getItem('access_token')) {
+      this.router.navigateByUrl('/');
+    }
   }
 
   onLogin() {
@@ -42,7 +48,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/');
         }
       },
-      (error: any) => {
+      (error) => {
         this.formLoading = false;
         this.loginError = error.message;
       }
@@ -55,6 +61,4 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
-
-  ngOnInit(): void {}
 }

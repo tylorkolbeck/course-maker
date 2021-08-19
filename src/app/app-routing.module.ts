@@ -16,14 +16,19 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: CourseEditorComponent, canActivate: [AuthGuard] },
       {
-        path: 'dashboard',
+        path: '',
         component: DashboardComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'course/:id',
+        component: CourseEditorComponent,
         canActivate: [AuthGuard],
       },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: '**', component: LoginComponent },
     ],
   },
 ];

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
 import { Course, Lesson, Section } from '../../Models/Course.model';
-import { Subject, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { Subject, ReplaySubject } from 'rxjs';
+import { environment } from '../../../environments/environment';
 // @ts-ignore: Unreachable code error
 import cloneDeep from 'lodash.clonedeep';
 
 // ** Dummy Data **
-import course from '../../../app/_helpers/dummyData/course';
+import { HttpClient } from '@angular/common/http';
 
 // ** Dummy Data **
 
@@ -14,30 +15,27 @@ import course from '../../../app/_helpers/dummyData/course';
   providedIn: 'root',
 })
 export class CourseService {
+  courseApiUrl: string = environment.courseApiUrl;
+
   // Set up the observable
   public courseChanged: Subject<Course> = new Subject<Course>();
   public lessonBeingEdited: Subject<Lesson> = new ReplaySubject<Lesson>();
 
   private _course: any;
 
-  constructor() {
-    // Assign dummy data
-    this.fetchCourseData();
-  }
+  constructor(private http: HttpClient) {}
 
   set course(course: Course) {
     this._course = course;
   }
 
   get course() {
-    this._course.sections.sort((a: Section, b: Section) => {
-      return a.order - b.order;
-    });
+    if (this._course.sections) {
+      this._course.sections.sort((a: Section, b: Section) => {
+        return a.order - b.order;
+      });
+    }
     return this._course;
-  }
-
-  fetchCourseData() {
-    this.course = cloneDeep(course);
   }
 
   setLessonBeingEdited(sectionId: string, lessonId: string) {
@@ -61,22 +59,19 @@ export class CourseService {
   }
 
   addSection() {
-    const newCourse = cloneDeep(this.course);
+    this.doAddSection({
+      course_id: this.course.id,
+    }).subscribe((res: any) => {
+      const newSection = res.content.section;
+      const newCourse = cloneDeep(this.course);
 
-    const newLesson = new Lesson('New Lesson', 0);
-    const newSection = new Section(
-      'New Section',
-      [newLesson],
-      this.course.sections.length + 1
-    );
+      newCourse.sections.push(newSection);
 
-    newCourse.sections.push(newSection);
+      this.courseChanged.next(newCourse);
+      this.course = newCourse;
 
-    this.courseChanged.next(newCourse);
-    this.course = newCourse;
-    this.lessonBeingEdited.next(newLesson);
-
-    return newSection.id;
+      return newSection.id;
+    });
   }
 
   getSectionLessons(id: string) {
@@ -89,7 +84,9 @@ export class CourseService {
 
     if (sectionToGet) {
       lessonsToGet = sectionToGet.lessons;
-      return lessonsToGet.sort((a: Lesson, b: Lesson) => a.order - b.order);
+      if (lessonsToGet) {
+        return lessonsToGet.sort((a: Lesson, b: Lesson) => a.order - b.order);
+      }
     }
   }
 
@@ -97,11 +94,13 @@ export class CourseService {
   updateLessonsOrderInSection(id: string, lessons: Lesson[]) {
     const courseClone = cloneDeep(this.course);
     interface lessonOrderUpdatePayload {
+      courseId: string;
       sectionId: string;
       lessons: { id: string; order: number }[];
     }
 
     let lessonsReorderPayload: lessonOrderUpdatePayload = {
+      courseId: this.course.id,
       sectionId: '',
       lessons: [],
     };
@@ -126,7 +125,6 @@ export class CourseService {
         };
       }
     );
-    this.course = course;
 
     console.log('PAYLOAD TO UPDATE LESSONS ORDER', lessonsReorderPayload);
   }
@@ -138,7 +136,7 @@ export class CourseService {
     }
 
     let sectionsReorderPayload: courseOrderUpdatePayload = {
-      courseId: '',
+      courseId: this.course.id,
       sections: [],
     };
 
@@ -152,8 +150,21 @@ export class CourseService {
       return { ...section };
     });
 
-    this.course = course;
-
     console.log('PAYLOAD TO UPDATE SECTIONS ORDER', sectionsReorderPayload);
+  }
+
+  fetchCourse(courseId: string) {
+    this.http.get(`${this.courseApiUrl}/${courseId}`).subscribe((res: any) => {
+      this.course = res.content.course;
+      this.courseChanged.next(this.course);
+    });
+  }
+
+  fetchCourses() {
+    return this.http.get(this.courseApiUrl);
+  }
+
+  doAddSection(reqBody: { course_id: string }) {
+    return this.http.post(environment.privateApiUrl + '/sections', reqBody);
   }
 }
