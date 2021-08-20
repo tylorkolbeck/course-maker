@@ -23,3 +23,41 @@
     <quill-editor [ngModel]="lesson?.body"></quill-editor>
   </div>
 </div>
+
+<!-- SECTION EDITOR MODAL -->
+<app-modal>
+  <div class="modal-section-wrapper">
+    <div class="field modal-section">
+      <label class="label">Title</label>
+      <input class="input" type="text" value="Section One" />
+    </div>
+    <div class="field settings-field">
+      <div>
+        <p class="settings-field-header">Is Public</p>
+        <p>If set to public students will see this section in the course</p>
+      </div>
+      <div>
+        <label class="switch">
+          <input type="checkbox" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+    <div class="field settings-field">
+      <div>
+        <p class="settings-field-header">Delete Section</p>
+        <p>
+          <span class="danger bold">Warning:</span> Deleting this section will
+          delete all of its lessons
+        </p>
+      </div>
+      <div>
+        <button class="button is-danger">Delete</button>
+      </div>
+    </div>
+    <div class="settings-field-controls buttons">
+      <div class="button is-primary">Cancel</div>
+      <div class="button is-success">Save</div>
+    </div>
+  </div>
+</app-modal>

@@ -31,6 +31,7 @@ import { appInitializer } from './_helpers/app.initializer';
 
 // Services
 import { AuthService } from '../core/services/Auth/auth.service';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AuthService } from '../core/services/Auth/auth.service';
     DashboardComponent,
     RegisterComponent,
     SectionCardComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

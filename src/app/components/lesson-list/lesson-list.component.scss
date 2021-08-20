@@ -22,21 +22,18 @@
       display: flex;
       position: sticky;
       top: 0;
-      background: lighten($blue, 10%);
       align-items: center;
       justify-content: space-evenly;
       margin: 0;
-      padding: 6px 0px;
-      // border: 1px solid rgba($white, 0.3);
+      z-index: 1;
+      & button {
+        margin-bottom: 0;
+      }
 
       & .divider {
         height: 20px;
         width: 1px;
         border-right: 1px solid rgba($white, 0.3);
-      }
-
-      button {
-        background: $blue !important;
       }
     }
   }
@@ -54,7 +51,7 @@
     width: 30px;
     border-radius: 0px 6px 6px 0px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    z-index: 100;
+    z-index: 1;
 
     &:hover {
       cursor: pointer;

@@ -61,3 +61,28 @@
     }
   }
 }
+
+:host ::ng-deep .modal-section-wrapper {
+  & .settings-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 20px 0px;
+
+    border-bottom: 1px solid rgba($white, 0.3);
+  }
+  & .settings-field-header {
+    font-weight: bold !important;
+  }
+
+  & .settings-field-controls {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0px 0px;
+    margin-top: 50px;
+  }
+}
+
+// :host /deep/ .modal-section {
+
+// }

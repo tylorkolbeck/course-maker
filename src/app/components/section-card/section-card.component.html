@@ -1,8 +1,8 @@
 <cdk-accordion>
   <cdk-accordion-item
     #accordionItem="cdkAccordionItem"
-    role="button"
-    [expanded]="true"
+    role="true"
+    [expanded]="false"
     [attr.aria-expanded]="accordionItem.expanded"
     [attr.id]="'accordion-header-' + sectionId"
     [attr.aria-controls]="'accordion-body-' + sectionId"
@@ -10,10 +10,12 @@
     <div class="section-card-container">
       <div class="section-card-title">
         <ng-content></ng-content>
+
         <p style="margin-left: 10px">
           {{ sectionTitle }}
         </p>
       </div>
+
       <span (click)="accordionItem.toggle()">
         <i *ngIf="accordionItem.expanded" class="fas fa-chevron-down"></i>
         <i *ngIf="!accordionItem.expanded" class="fas fa-chevron-up"></i>
@@ -22,25 +24,32 @@
 
     <div cdkDropList (cdkDropListDropped)="drop($event)">
       <div
-        class="lesson-card-container"
-        [ngClass]="{
-          'lesson-card-container-active':
-            lessonBeingEditedId === lesson.id ? true : false
-        }"
-        *ngFor="let lesson of lessons; let i = index"
         role="region"
         [style.display]="accordionItem.expanded ? '' : 'none'"
         [attr.id]="'accordion-body-' + sectionId"
-        cdkDrag
+        class="section-wrapper"
       >
-        <div class="lesson-card-placeholder" *cdkDragPlaceholder></div>
-        <div cdkDragHandle class="drag-handle">
-          <i class="fas fa-ellipsis-v"></i>
+        <div>
+          <button class="button is-primary is-fullwidth">Add Lesson</button>
         </div>
+        <div
+          cdkDrag
+          class="lesson-card-container"
+          [ngClass]="{
+            'lesson-card-container-active':
+              lessonBeingEditedId === lesson.id ? true : false
+          }"
+          *ngFor="let lesson of lessons; let i = index"
+        >
+          <div class="lesson-card-placeholder" *cdkDragPlaceholder></div>
+          <div cdkDragHandle class="drag-handle">
+            <i class="fas fa-ellipsis-v"></i>
+          </div>
 
-        <p class="lesson-card-title" (click)="onEditLesson(lesson.id)">
-          {{ lesson.title }}
-        </p>
+          <p class="lesson-card-title" (click)="onEditLesson(lesson.id)">
+            {{ lesson.title }}
+          </p>
+        </div>
       </div>
     </div>
   </cdk-accordion-item>
