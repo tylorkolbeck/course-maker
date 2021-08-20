@@ -6,6 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements OnInit {
+  modalOpen = false;
+
   @Input() title: string = '';
 
   constructor() {}

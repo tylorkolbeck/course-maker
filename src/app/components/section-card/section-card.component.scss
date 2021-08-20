@@ -46,6 +46,13 @@
     align-items: center;
     flex-grow: 1;
     padding: 8px 0px;
+    width: 100%;
+    margin-right: 20px;
+
+    &:hover {
+      cursor: pointer;
+      color: $green;
+    }
 
     &:hover ::ng-deep .drag-handle {
       @include parent-drag-handle-container-hover();

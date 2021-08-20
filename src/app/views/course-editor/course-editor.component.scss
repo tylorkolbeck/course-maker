@@ -81,6 +81,10 @@
     padding: 0px 0px;
     margin-top: 50px;
   }
+
+  & .settings-field-box-left {
+    padding-right: 40px;
+  }
 }
 
 // :host /deep/ .modal-section {

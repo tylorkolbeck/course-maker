@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { Course, Lesson, Section } from '../../Models/Course.model';
-import { Subject, ReplaySubject } from 'rxjs';
+import { Subject, ReplaySubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 // @ts-ignore: Unreachable code error
 import cloneDeep from 'lodash.clonedeep';
@@ -9,13 +10,12 @@ import cloneDeep from 'lodash.clonedeep';
 // ** Dummy Data **
 import { HttpClient } from '@angular/common/http';
 
-// ** Dummy Data **
-
 @Injectable({
   providedIn: 'root',
 })
 export class CourseService {
   courseApiUrl: string = environment.courseApiUrl;
+  sectionApiUrl: string = environment.sectionApiUrl;
 
   // Set up the observable
   public courseChanged: Subject<Course> = new Subject<Course>();
@@ -166,5 +166,26 @@ export class CourseService {
 
   doAddSection(reqBody: { course_id: string }) {
     return this.http.post(environment.privateApiUrl + '/sections', reqBody);
+  }
+
+  removeSection(sectionId: string) {
+    // TODO hold on to the section and make api call here
+    // if the api call is unsucssefull put the section back in the UI
+    let courseCopy = cloneDeep(this.course);
+    courseCopy.sections = courseCopy.sections.filter(
+      (section: Section) => section.id !== sectionId
+    );
+    this.course = courseCopy;
+    this.courseChanged.next(courseCopy);
+  }
+
+  doDeleteSection(sectionId: string): Observable<string> {
+    console.log('running delete');
+    return this.http.delete(this.sectionApiUrl + '/' + sectionId).pipe(
+      map((res: any) => {
+        this.removeSection(sectionId);
+        return res.content.sectionId;
+      })
+    );
   }
 }

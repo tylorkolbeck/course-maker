@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Lesson } from 'src/core/Models/Course.model';
+
+import { Lesson } from '../../../core/Models/Course.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { CourseService } from 'src/core/services/Course/course.service';
+import { CourseService } from '../../../core/services/Course/course.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-section-card',
@@ -14,8 +17,12 @@ export class SectionCardComponent implements OnInit {
   @Input() sectionTitle: string = '';
   lessons: Lesson[] = [];
   lessonBeingEditedId: string = '';
+  modalOpen: boolean = false;
+  sectionApiUrl: string = environment.sectionApiUrl;
+  deleteLoading: boolean = false;
+  deleteError: string | null = null;
 
-  constructor(private courseService: CourseService) {}
+  constructor(private courseService: CourseService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.lessons = this.courseService.getSectionLessons(this.sectionId);
@@ -34,5 +41,27 @@ export class SectionCardComponent implements OnInit {
 
   onEditLesson(lessonId: string) {
     this.courseService.setLessonBeingEdited(this.sectionId, lessonId);
+  }
+
+  onToggleModal() {
+    this.modalOpen = !this.modalOpen;
+    this.deleteError = null;
+  }
+
+  onDeleteSection() {
+    this.deleteLoading = true;
+    this.courseService.doDeleteSection(this.sectionId).subscribe(
+      (sectionId) => {
+        if (sectionId) {
+          this.deleteLoading = false;
+          this.onToggleModal();
+        }
+      },
+      (error) => {
+        this.deleteError =
+          'There was an issue deleting the section. Please refresh the page and try again';
+        this.deleteLoading = false;
+      }
+    );
   }
 }

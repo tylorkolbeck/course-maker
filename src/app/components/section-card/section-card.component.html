@@ -8,7 +8,7 @@
     [attr.aria-controls]="'accordion-body-' + sectionId"
   >
     <div class="section-card-container">
-      <div class="section-card-title">
+      <div class="section-card-title" (click)="onToggleModal()">
         <ng-content></ng-content>
 
         <p style="margin-left: 10px">
@@ -54,3 +54,55 @@
     </div>
   </cdk-accordion-item>
 </cdk-accordion>
+
+<!-- SECTION EDITOR MODAL -->
+<div class="modal" [ngClass]="{ 'is-active': modalOpen }">
+  <div class="modal-background" (click)="onToggleModal()"></div>
+  <div class="modal-content">
+    <div class="box box--dark">
+      <!-- <app-modal [modalOpen]="editModalOpen"> -->
+      <div class="modal-section-wrapper">
+        <div class="field modal-section">
+          <label class="label">Title</label>
+          <input class="input" type="text" value="Section One" />
+        </div>
+        <div class="field settings-field">
+          <div class="settings-field-box-left">
+            <p class="settings-field-header">Is Public</p>
+            <p>If set to public students will see this section in the course</p>
+          </div>
+          <div>
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="field settings-field">
+          <div class="settings-field-box-left">
+            <p class="settings-field-header">Delete Section</p>
+            <p>
+              <span class="danger bold">Warning:</span> Deleting this section
+              will delete all of its lessons
+            </p>
+            <p *ngIf="deleteError" class="danger">{{ deleteError }}</p>
+          </div>
+          <div>
+            <button
+              class="button is-danger"
+              [ngClass]="{ 'is-loading': deleteLoading }"
+              (click)="onDeleteSection()"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+        <div class="settings-field-controls buttons">
+          <!-- <div class="button is-primary" (click)="onToggleModal()">Cancel</div> -->
+          <div class="button is-primary" (click)="onToggleModal()">Close</div>
+        </div>
+      </div>
+      <!-- </app-modal> -->
+    </div>
+  </div>
+</div>
