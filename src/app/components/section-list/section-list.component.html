@@ -1,0 +1,62 @@
+<div
+  class="note-list-container"
+  [ngClass]="{ 'side-nav-bar-collapsed': !(showSideNav$ | async) }"
+  [ngStyle]="{ 'width.px': sideNavWidth }"
+>
+  <!-- Toggle UI to hide and show lesson list -->
+  <div
+    class="note-list-toggle"
+    (click)="onSidebarToggle()"
+    [ngStyle]="{ 'left.px': sideNavWidth }"
+  >
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <!-- LIST OF ALL SECTIONS -->
+  <div class="note-list">
+    <!-- Search Input -->
+    <!-- <p class="control has-icons-left">
+      <input
+        class="input note-list-search-input"
+        type="text"
+        placeholder="Search"
+      />
+      <span class="icon is-small is-left">
+        <i class="fas fa-search"></i>
+      </span>
+    </p> -->
+
+    <div class="buttons section-controls" style="margin-top: auto">
+      <button
+        class="is-success is-fullwidth button square"
+        (click)="onAddSection()"
+      >
+        <i class="fas fa-plus" style="padding-right: 10px"></i>
+        Section
+      </button>
+    </div>
+
+    <!-- List of section and their lessons -->
+    <div
+      cdkDropList
+      (cdkDropListDropped)="drop($event)"
+      class="lesson-list-lesson-wrapper"
+    >
+      <div class="section-box" *ngFor="let section of sections" cdkDrag>
+        <div class="section-card-placeholder" *cdkDragPlaceholder></div>
+        <app-section
+          [section]="section"
+          [sectionTitle]="section.title"
+          [sectionId]="section.id"
+          [lessons]="section.lessons"
+          [collapsed]="section.collapsed"
+          id="section-{{ section.id }}"
+        >
+          <div cdkDragHandle class="drag-handle">
+            <i class="fas fa-ellipsis-v"></i>
+          </div>
+        </app-section>
+      </div>
+    </div>
+  </div>
+</div>

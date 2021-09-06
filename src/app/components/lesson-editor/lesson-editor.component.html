@@ -1,0 +1,24 @@
+<div class="editor-container" *ngIf="lesson">
+  <div class="editor-header">
+    <input
+      class="input note-list-search-input"
+      type="text"
+      placeholder="Title"
+      [value]="lesson?.title"
+    />
+
+    <div class="editor-header-date">
+      <p>Last Edited: {{ lesson.updatedAt | date }}</p>
+    </div>
+
+    <div class="settings">
+      <div class="navbar-item nav-bar-icon-btn">
+        <i class="fas fa-trash"></i>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <quill-editor [ngModel]="lesson?.body"></quill-editor>
+  </div>
+</div>

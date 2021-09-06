@@ -8,6 +8,8 @@ export const environment = {
   courseApiUrl: 'http://localhost:3001/api/v1/private/courses',
   privateApiUrl: 'http://localhost:3001/api/v1/private',
   sectionApiUrl: 'http://localhost:3001/api/v1/private/sections',
+  lessonApiUrl: 'http://localhost:3001/api/v1/private/lessons',
+  apiEndpoint: 'http://localhost:3001/api/v1/private',
 };
 
 /*

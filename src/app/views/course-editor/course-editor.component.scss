@@ -1,67 +1,5 @@
 @import "../../../main-styles.scss";
 
-.editor-container {
-  overflow-y: scroll;
-  max-height: calc(100vh - 60px);
-  width: 100% !important;
-  height: calc(100vh - 50px);
-}
-
-.editor-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: lighten($blue-secondary, 2%);
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  height: 40px;
-
-  .editor-header-date p {
-    font-size: 14px;
-    white-space: nowrap;
-    font-style: italic;
-    color: rgba($white, 0.6);
-    margin-right: 20px;
-    margin-left: 20px;
-    border: 0px;
-  }
-
-  & input {
-    background: none;
-    color: $white;
-    font-weight: bold;
-    border-radius: 0;
-    margin-left: 2px;
-  }
-
-  .settings {
-    height: 100%;
-
-    .nav-bar-icon-btn {
-      transition: all 0.2s ease-in-out;
-      height: 100%;
-
-      i.fas,
-      i.far {
-        transition: all 0.2s ease-in-out;
-        padding: 0 0.6em;
-        color: rgb(227, 94, 94);
-      }
-
-      &:hover {
-        background-color: rgb(227, 94, 94);
-        cursor: pointer;
-
-        i.fas {
-          color: $white !important;
-        }
-      }
-    }
-  }
-}
-
 :host ::ng-deep .modal-section-wrapper {
   & .settings-field {
     display: flex;
@@ -86,7 +24,3 @@
     padding-right: 40px;
   }
 }
-
-// :host /deep/ .modal-section {
-
-// }

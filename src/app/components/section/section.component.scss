@@ -6,9 +6,13 @@
   cursor: grab;
   opacity: 1;
   transition: opacity 0.2s ease-in-out;
+  padding: 4px 8px;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    color: $green;
+    background: $green;
+    color: $white;
+    border-radius: 3px;
   }
 }
 
@@ -48,6 +52,9 @@
     padding: 8px 0px;
     width: 100%;
     margin-right: 20px;
+    overflow-x: hidden;
+    max-width: 300px;
+    white-space: nowrap;
 
     &:hover {
       cursor: pointer;
@@ -65,11 +72,12 @@
 }
 
 .lesson-card-container {
-  background: lighten($blue, 5%);
-  border-top: 1px solid lighten($blue, 2%);
+  background: lighten($blue, 20%);
+  border-bottom: 1px solid lighten($blue, 18%);
   display: flex;
   padding: 8px;
   flex-wrap: wrap;
+  align-items: center;
 
   .lesson-card-title {
     margin-left: 20px;
@@ -104,7 +112,9 @@
 }
 
 .lesson-card-container-active {
-  background: darken($green, 15%) !important;
+  // background: darken($green, 30%) !important;
+  color: $green;
+  font-weight: bold;
 
   & .note-card-title {
     color: black;

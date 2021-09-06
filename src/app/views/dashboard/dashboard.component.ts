@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from '../../../core/Models/Course.model';
 import { AuthService } from '../../../core/services/Auth/auth.service';
 import { CourseService } from '../../../core/services/Course/course.service';
+import { SectionsService } from '../../../core/services/Course/sections.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -15,13 +16,14 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private sectionService: SectionsService
   ) {}
 
   ngOnInit(): void {
-    this.courseService.fetchCourses().subscribe((res: any) => {
-      if (res?.content?.courses) {
-        this.courses = res.content.courses;
+    this.courseService.fetchCourses().subscribe((courses: any) => {
+      if (courses) {
+        this.courses = courses;
       }
     });
   }

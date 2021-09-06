@@ -28,26 +28,30 @@ export class Course {
   sections: Section[] | [];
   createdAt: Date;
   updatedAt?: Date;
+  public: boolean;
 
   constructor(title: string, sections: Section[]) {
     this.id = uuidv4();
     this.title = title;
     this.sections = sections;
     this.createdAt = new Date();
+    this.public = false;
   }
 }
 
 export class Section {
   id: string;
   title: string;
-  lessons?: Lesson[] | [];
+  lessons: Lesson[] | [] = [];
   order: number;
+  collapsed: boolean;
 
   constructor(title: string, lessons: Lesson[], order: number) {
     this.id = uuidv4();
     this.title = title;
     this.lessons = lessons;
     this.order = order;
+    this.collapsed = false;
   }
 }
 
@@ -56,6 +60,7 @@ export class Lesson {
   title: string = '';
   body: string = '';
   order: number;
+  updatedAt?: Date;
 
   constructor(
     title: string,

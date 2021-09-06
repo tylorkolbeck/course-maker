@@ -2,8 +2,8 @@
   <cdk-accordion-item
     #accordionItem="cdkAccordionItem"
     role="true"
-    [expanded]="false"
-    [attr.aria-expanded]="accordionItem.expanded"
+    [expanded]="isExpanded"
+    [attr.aria-expanded]="isExpanded"
     [attr.id]="'accordion-header-' + sectionId"
     [attr.aria-controls]="'accordion-body-' + sectionId"
   >
@@ -16,22 +16,27 @@
         </p>
       </div>
 
-      <span (click)="accordionItem.toggle()">
-        <i *ngIf="accordionItem.expanded" class="fas fa-chevron-down"></i>
-        <i *ngIf="!accordionItem.expanded" class="fas fa-chevron-up"></i>
+      <span (click)="onToggleSectionAccorian()">
+        <i *ngIf="isExpanded" class="fas fa-chevron-down"></i>
+        <i *ngIf="!isExpanded" class="fas fa-chevron-up"></i>
       </span>
     </div>
 
     <div cdkDropList (cdkDropListDropped)="drop($event)">
       <div
         role="region"
-        [style.display]="accordionItem.expanded ? '' : 'none'"
+        [style.display]="isExpanded ? '' : 'none'"
         [attr.id]="'accordion-body-' + sectionId"
         class="section-wrapper"
       >
-        <div>
-          <button class="button is-primary is-fullwidth">Add Lesson</button>
-        </div>
+        <!-- <div>
+          <button
+            class="button is-primary is-fullwidth square"
+            (click)="onAddLesson()"
+          >
+            <i class="fas fa-plus" style="padding-right: 10px"></i> Lesson
+          </button>
+        </div> -->
         <div
           cdkDrag
           class="lesson-card-container"
@@ -46,7 +51,7 @@
             <i class="fas fa-ellipsis-v"></i>
           </div>
 
-          <p class="lesson-card-title" (click)="onEditLesson(lesson.id)">
+          <p class="lesson-card-title" (click)="onEditLesson(lesson)">
             {{ lesson.title }}
           </p>
         </div>
@@ -76,6 +81,22 @@
               <input type="checkbox" />
               <span class="slider round"></span>
             </label>
+          </div>
+        </div>
+        <div class="field settings-field">
+          <div class="settings-field-box-left">
+            <p class="settings-field-header">Add Lesson</p>
+            <p>Add a lesson to this section and start editing</p>
+            <!-- <p *ngIf="deleteError" class="danger">{{ deleteError }}</p> -->
+          </div>
+          <div>
+            <button
+              class="button is-success"
+              [ngClass]="{ 'is-loading': deleteLoading }"
+              (click)="onAddLesson()"
+            >
+              Add Lesson
+            </button>
           </div>
         </div>
         <div class="field settings-field">

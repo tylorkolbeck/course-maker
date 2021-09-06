@@ -16,9 +16,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
-import { LessonListComponent } from './components/lesson-list/lesson-list.component';
+import { SectionListComponent } from './components/section-list/section-list.component';
 import { QuillModule } from 'ngx-quill';
-import { SectionCardComponent } from './components/section-card/section-card.component';
+import { SectionComponent } from './components/section/section.component';
 
 // Views
 import { CourseEditorComponent } from './views/course-editor/course-editor.component';
@@ -32,19 +32,23 @@ import { appInitializer } from './_helpers/app.initializer';
 // Services
 import { AuthService } from '../core/services/Auth/auth.service';
 import { ModalComponent } from './components/modal/modal.component';
+import { LessonEditorComponent } from './components/lesson-editor/lesson-editor.component';
+import { LessonListComponent } from './components/lesson-list/lesson-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     MainLayoutComponent,
-    LessonListComponent,
+    SectionListComponent,
     CourseEditorComponent,
     LoginComponent,
     DashboardComponent,
     RegisterComponent,
-    SectionCardComponent,
+    SectionComponent,
     ModalComponent,
+    LessonEditorComponent,
+    LessonListComponent,
   ],
   imports: [
     BrowserModule,

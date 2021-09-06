@@ -250,6 +250,12 @@ input:checked + .slider:before {
   font-weight: bold;
 }
 
+// Button global styles
+
+button.square {
+  border-radius: 0 !important;
+}
+
 button.is-primary:hover {
   color: $green !important;
 }
