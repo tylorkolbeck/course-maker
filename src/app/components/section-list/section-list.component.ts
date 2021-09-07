@@ -1,9 +1,10 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { SidebarService } from '../../../core/services/Sidebar/sidebar.service';
 import { Section } from '../../../core/Models/Course.model';
 import { SectionsService } from '../../../core/services/Course/sections.service';
+import { CourseService } from '../../../core/services/Course/course.service';
 
 // Todo
 // [ ] Setup a service to handle lesson state
@@ -76,8 +77,9 @@ export class SectionListComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    // moveItemInArray(this.sections, event.previousIndex, event.currentIndex);
-    // this.courseService.updateSectionsOrder(this.sections);
+    console.log(event.previousIndex, event.currentIndex);
+    moveItemInArray(this.sections, event.previousIndex, event.currentIndex);
+    this.sectionsService.updateSectionsOrder(this.sections);
   }
 
   onToggleAddingLessons() {

@@ -3,80 +3,6 @@
 
 @import "~quill/dist/quill.core.css";
 @import "~quill/dist/quill.snow.css";
-.ql-container {
-  overflow: hidden !important;
-}
-
-.ql-editor {
-  padding: 40px 40px;
-  padding-top: 0px;
-}
-
-.ql-toolbar.ql-snow,
-.ql-container.ql-snow,
-.ql-container.ql-snow::placeholder {
-  border: none !important;
-  color: $white !important;
-}
-
-.ql-editor.ql-blank::before {
-  content: "";
-  color: $white !important;
-}
-
-.ql-editor,
-strong {
-  color: $white !important;
-}
-
-.ql-toolbar {
-  color: #fff !important;
-  display: flex;
-  justify-content: center;
-  left: 50%;
-  position: sticky;
-  top: 0px;
-  z-index: 1;
-  background-color: $blue-secondary;
-}
-
-.ql-toolbar button:hover {
-  & .ql-fill {
-    fill: $green !important;
-  }
-
-  & .ql-stroke {
-    stroke: $green !important;
-  }
-
-  & .ql-fill {
-    fill: $green !important;
-  }
-}
-
-.ql-toolbar .ql-stroke {
-  stroke: #fff;
-}
-
-.ql-toolbar .ql-fill {
-  fill: #fff;
-}
-
-.ql-toolbar .ql-picker {
-  color: #fff;
-}
-
-.ql-toolbar .ql-active .ql-stroke {
-  stroke: $green !important;
-}
-
-.ql-toolbar .ql-active .ql-fill {
-  fill: $green !important;
-}
-
-.ql-toolbar .ql-active .ql-picker {
-  color: $green !important;
-}
 
 html,
 body {
@@ -116,6 +42,10 @@ p {
 a {
   font-size: 1rem;
   font-weight: bold;
+}
+
+.text-subdued {
+  color: $text-subdued !important;
 }
 
 p.is-danger {
@@ -259,3 +189,81 @@ button.square {
 button.is-primary:hover {
   color: $green !important;
 }
+
+// Quill Editor Styling
+.ql-container {
+  overflow: hidden !important;
+}
+
+.ql-editor {
+  padding: 40px 40px;
+  padding-top: 0px;
+}
+
+.ql-toolbar.ql-snow,
+.ql-container.ql-snow,
+.ql-container.ql-snow::placeholder {
+  border: none !important;
+  color: $white !important;
+}
+
+.ql-editor.ql-blank::before {
+  content: "";
+  color: $white !important;
+}
+
+.ql-editor,
+strong {
+  color: $white !important;
+}
+
+.ql-toolbar {
+  color: #fff !important;
+  display: flex;
+  justify-content: center;
+  left: 50%;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background-color: $blue-secondary;
+}
+
+.ql-toolbar button:hover {
+  & .ql-fill {
+    fill: $green !important;
+  }
+
+  & .ql-stroke {
+    stroke: $green !important;
+  }
+
+  & .ql-fill {
+    fill: $green !important;
+  }
+}
+
+.ql-toolbar .ql-stroke {
+  stroke: #fff;
+}
+
+.ql-toolbar .ql-fill {
+  fill: #fff;
+}
+
+.ql-toolbar .ql-picker {
+  color: #fff;
+}
+
+.ql-toolbar .ql-active .ql-stroke {
+  stroke: $green !important;
+}
+
+.ql-toolbar .ql-active .ql-fill {
+  fill: $green !important;
+}
+
+.ql-toolbar .ql-active .ql-picker {
+  color: $green !important;
+}
+
+// End quill editor styling

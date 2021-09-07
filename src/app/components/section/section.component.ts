@@ -39,14 +39,6 @@ export class SectionComponent implements OnInit {
     this.isExpanded = !this.collapsed;
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.lessons, event.previousIndex, event.currentIndex);
-    this.courseService.updateLessonsOrderInSection(
-      this.sectionId,
-      this.lessons
-    );
-  }
-
   onEditLesson(lesson: Lesson) {
     this.courseService.setLessonBeingEdited(lesson);
   }
@@ -83,6 +75,19 @@ export class SectionComponent implements OnInit {
   }
 
   onToggleSectionAccorian() {
+    this.sectionsService.updateSection(this.sectionId, {
+      collapsed: this.isExpanded,
+    });
     this.isExpanded = !this.isExpanded;
+  }
+
+  onTogglePublic() {
+    this.sectionsService.updateSection(this.sectionId, {
+      public: !this.section?.public,
+    });
+
+    if (this.section) {
+      this.section.public = !this.section?.public;
+    }
   }
 }

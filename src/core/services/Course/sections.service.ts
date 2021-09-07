@@ -46,6 +46,7 @@ export class SectionsService {
     if (this.courseId) {
       return this.sectionDataService.doAddSection(this.courseId).pipe(
         map((res) => {
+          res.content.section.lessons = [];
           this.sections.push(res.content.section);
           this.sections$.next(this.sections.slice());
           return res.content.section.id;
@@ -93,5 +94,35 @@ export class SectionsService {
       });
   }
 
-  updateSection() {}
+  updateSectionsOrder(sections: Section[]) {
+    interface courseOrderUpdatePayload {
+      courseId: any;
+      sections: { id: string; order: number }[];
+    }
+
+    let sectionsReorderPayload: courseOrderUpdatePayload = {
+      courseId: this.courseId,
+      sections: [],
+    };
+
+    this.sections = sections.map((section: Section, index: number) => {
+      section.order = index;
+      sectionsReorderPayload.sections.push({
+        id: section.id,
+        order: index,
+      });
+
+      return { ...section };
+    });
+
+    this.sectionDataService
+      .doSectionReorder(sectionsReorderPayload)
+      .subscribe((res) => console.log(res));
+  }
+
+  updateSection(sectionId: string, payload: any) {
+    return this.sectionDataService
+      .doSectionUpdate(sectionId, payload)
+      .subscribe((res) => console.log(res));
+  }
 }

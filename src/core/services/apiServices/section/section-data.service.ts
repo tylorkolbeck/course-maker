@@ -31,4 +31,18 @@ export class SectionDataService {
       .delete(`${environment.apiEndpoint}/sections/${sectionId}`)
       .pipe(map((res) => res));
   }
+
+  doSectionReorder(payload: any) {
+    return this.http.post<any>(
+      `${environment.apiEndpoint}/sections/reorder/${payload.courseId}`,
+      payload
+    );
+  }
+
+  doSectionUpdate(sectionId: string, payload: any) {
+    return this.http.post<any>(
+      `${environment.apiEndpoint}/sections/${sectionId}`,
+      payload
+    );
+  }
 }

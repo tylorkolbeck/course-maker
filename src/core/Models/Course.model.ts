@@ -45,6 +45,7 @@ export class Section {
   lessons: Lesson[] | [] = [];
   order: number;
   collapsed: boolean;
+  public: boolean = false;
 
   constructor(title: string, lessons: Lesson[], order: number) {
     this.id = uuidv4();

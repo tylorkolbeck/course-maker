@@ -71,67 +71,67 @@ export class CourseService {
   // }
 
   // Reorder Functions
-  updateLessonsOrderInSection(id: string, lessons: Lesson[]) {
-    const courseClone = cloneDeep(this.course);
-    interface lessonOrderUpdatePayload {
-      courseId: string;
-      sectionId: string;
-      lessons: { id: string; order: number }[];
-    }
+  // updateLessonsOrderInSection(id: string, lessons: Lesson[]) {
+  //   const courseClone = cloneDeep(this.course);
+  //   interface lessonOrderUpdatePayload {
+  //     courseId: string;
+  //     sectionId: string;
+  //     lessons: { id: string; order: number }[];
+  //   }
 
-    let lessonsReorderPayload: lessonOrderUpdatePayload = {
-      courseId: this.course.id,
-      sectionId: '',
-      lessons: [],
-    };
+  //   let lessonsReorderPayload: lessonOrderUpdatePayload = {
+  //     courseId: this.course.id,
+  //     sectionId: '',
+  //     lessons: [],
+  //   };
 
-    this.course = courseClone.sections.map(
-      (section: Section, index: number) => {
-        if (section.id === id) {
-          lessonsReorderPayload.sectionId = id;
-          section.lessons = lessons.map((lesson: Lesson, index: number) => {
-            lesson.order = index;
-            lessonsReorderPayload.lessons.push({
-              id: lesson.id,
-              order: index,
-            });
+  //   this.course = courseClone.sections.map(
+  //     (section: Section, index: number) => {
+  //       if (section.id === id) {
+  //         lessonsReorderPayload.sectionId = id;
+  //         section.lessons = lessons.map((lesson: Lesson, index: number) => {
+  //           lesson.order = index;
+  //           lessonsReorderPayload.lessons.push({
+  //             id: lesson.id,
+  //             order: index,
+  //           });
 
-            return { ...lesson };
-          });
-        }
+  //           return { ...lesson };
+  //         });
+  //       }
 
-        return {
-          ...section,
-        };
-      }
-    );
+  //       return {
+  //         ...section,
+  //       };
+  //     }
+  //   );
 
-    console.log('PAYLOAD TO UPDATE LESSONS ORDER', lessonsReorderPayload);
-  }
+  //   console.log('PAYLOAD TO UPDATE LESSONS ORDER', lessonsReorderPayload);
+  // }
 
-  updateSectionsOrder(sections: Section[]) {
-    interface courseOrderUpdatePayload {
-      courseId: string;
-      sections: { id: string; order: number }[];
-    }
+  // updateSectionsOrder(sections: Section[]) {
+  //   interface courseOrderUpdatePayload {
+  //     courseId: string;
+  //     sections: { id: string; order: number }[];
+  //   }
 
-    let sectionsReorderPayload: courseOrderUpdatePayload = {
-      courseId: this.course.id,
-      sections: [],
-    };
+  //   let sectionsReorderPayload: courseOrderUpdatePayload = {
+  //     courseId: this.course.id,
+  //     sections: [],
+  //   };
 
-    this.course.sections = sections.map((section: Section, index: number) => {
-      section.order = index;
-      sectionsReorderPayload.sections.push({
-        id: section.id,
-        order: index,
-      });
+  //   this.course.sections = sections.map((section: Section, index: number) => {
+  //     section.order = index;
+  //     sectionsReorderPayload.sections.push({
+  //       id: section.id,
+  //       order: index,
+  //     });
 
-      return { ...section };
-    });
+  //     return { ...section };
+  //   });
 
-    console.log('PAYLOAD TO UPDATE SECTIONS ORDER', sectionsReorderPayload);
-  }
+  //   console.log('PAYLOAD TO UPDATE SECTIONS ORDER', sectionsReorderPayload);
+  // }
 
   fetchCourse(courseId: string) {
     return this.http.get<Course>(`${this.courseApiUrl}/${courseId}`);

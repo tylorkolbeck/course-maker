@@ -11,32 +11,57 @@
       <div class="section-card-title" (click)="onToggleModal()">
         <ng-content></ng-content>
 
-        <p style="margin-left: 10px">
-          {{ sectionTitle }}
-        </p>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            flex-grow: 1;
+          "
+        >
+          <p style="margin-left: 10px">
+            {{ sectionTitle }}
+          </p>
+          <div
+            style="
+              display: flex;
+              margin-left: 10px;
+              flex-grow: 1;
+              margin-top: 10px;
+            "
+          >
+            <p class="section-subtitle">
+              <span>{{ lessons.length ? lessons.length : 0 }}</span>
+              Lessons |
+            </p>
+            <p
+              class="section-subtitle ml-1"
+              [ngClass]="{
+                'has-text-success': section?.public
+              }"
+            >
+              {{ section?.public ? "Public" : "Not Public" }}
+            </p>
+          </div>
+        </div>
       </div>
 
-      <span (click)="onToggleSectionAccorian()">
+      <span
+        (click)="onToggleSectionAccorian()"
+        style="align-self: flex-start; margin-top: 10px"
+      >
         <i *ngIf="isExpanded" class="fas fa-chevron-down"></i>
         <i *ngIf="!isExpanded" class="fas fa-chevron-up"></i>
       </span>
     </div>
 
-    <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div>
       <div
         role="region"
         [style.display]="isExpanded ? '' : 'none'"
         [attr.id]="'accordion-body-' + sectionId"
         class="section-wrapper"
       >
-        <!-- <div>
-          <button
-            class="button is-primary is-fullwidth square"
-            (click)="onAddLesson()"
-          >
-            <i class="fas fa-plus" style="padding-right: 10px"></i> Lesson
-          </button>
-        </div> -->
         <div
           class="lesson-card-add"
           *ngIf="lessons?.length === 0 && addingLessons"
@@ -44,8 +69,11 @@
           <div class="lesson-card-add-btn" (click)="onAddLesson(0)">+</div>
         </div>
 
+        <div *ngIf="lessons?.length === 0" class="p-2 no-lessons-card">
+          No Lessons
+        </div>
+
         <div
-          cdkDrag
           [ngClass]="{
             'lesson-card-container-active':
               lessonBeingEditedId === lesson.id ? true : false
@@ -58,9 +86,6 @@
           </div>
           <div class="lesson-card-container">
             <div class="lesson-card-placeholder" *cdkDragPlaceholder></div>
-            <div cdkDragHandle class="drag-handle">
-              <i class="fas fa-ellipsis-v"></i>
-            </div>
 
             <p class="lesson-card-title">
               {{ lesson.title }}
@@ -99,7 +124,11 @@
           </div>
           <div>
             <label class="switch">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                [checked]="section?.public"
+                (click)="onTogglePublic()"
+              />
               <span class="slider round"></span>
             </label>
           </div>
