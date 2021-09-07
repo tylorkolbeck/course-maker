@@ -27,13 +27,25 @@
     </p> -->
 
     <div class="buttons section-controls" style="margin-top: auto">
-      <button
-        class="is-success is-fullwidth button square"
-        (click)="onAddSection()"
-      >
-        <i class="fas fa-plus" style="padding-right: 10px"></i>
-        Section
-      </button>
+      <div>
+        <button
+          class="is-primary is-fullwidth button square"
+          (click)="onAddSection()"
+        >
+          <i class="fas fa-plus" style="padding-right: 10px"></i>
+          Section
+        </button>
+      </div>
+      <div>
+        <button
+          [ngClass]="{ 'is-success': addingLesson }"
+          class="is-primary is-fullwidth button square"
+          (click)="onToggleAddingLessons()"
+        >
+          <i class="fas fa-plus" style="padding-right: 10px"></i>
+          Lesson
+        </button>
+      </div>
     </div>
 
     <!-- List of section and their lessons -->
@@ -50,6 +62,7 @@
           [sectionId]="section.id"
           [lessons]="section.lessons"
           [collapsed]="section.collapsed"
+          [addingLessons]="addingLesson"
           id="section-{{ section.id }}"
         >
           <div cdkDragHandle class="drag-handle">

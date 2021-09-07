@@ -12,13 +12,13 @@
     </div>
 
     <div class="settings">
-      <div class="navbar-item nav-bar-icon-btn">
+      <div class="navbar-item nav-bar-icon-btn" (click)="onDeleteLesson()">
         <i class="fas fa-trash"></i>
       </div>
     </div>
   </div>
 
-  <div>
+  <div style="height: 100%">
     <quill-editor [ngModel]="lesson?.body"></quill-editor>
   </div>
 </div>

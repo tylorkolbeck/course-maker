@@ -38,22 +38,40 @@
           </button>
         </div> -->
         <div
+          class="lesson-card-add"
+          *ngIf="lessons?.length === 0 && addingLessons"
+        >
+          <div class="lesson-card-add-btn" (click)="onAddLesson(0)">+</div>
+        </div>
+
+        <div
           cdkDrag
-          class="lesson-card-container"
           [ngClass]="{
             'lesson-card-container-active':
               lessonBeingEditedId === lesson.id ? true : false
           }"
           *ngFor="let lesson of lessons; let i = index"
+          (click)="onEditLesson(lesson)"
         >
-          <div class="lesson-card-placeholder" *cdkDragPlaceholder></div>
-          <div cdkDragHandle class="drag-handle">
-            <i class="fas fa-ellipsis-v"></i>
+          <div class="lesson-card-add" *ngIf="i === 0 && addingLessons">
+            <div class="lesson-card-add-btn" (click)="onAddLesson(i)">+</div>
+          </div>
+          <div class="lesson-card-container">
+            <div class="lesson-card-placeholder" *cdkDragPlaceholder></div>
+            <div cdkDragHandle class="drag-handle">
+              <i class="fas fa-ellipsis-v"></i>
+            </div>
+
+            <p class="lesson-card-title">
+              {{ lesson.title }}
+            </p>
           </div>
 
-          <p class="lesson-card-title" (click)="onEditLesson(lesson)">
-            {{ lesson.title }}
-          </p>
+          <div class="lesson-card-add" *ngIf="addingLessons">
+            <div class="lesson-card-add-btn" (click)="onAddLesson(i + 1)">
+              +
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -67,10 +85,13 @@
     <div class="box box--dark">
       <!-- <app-modal [modalOpen]="editModalOpen"> -->
       <div class="modal-section-wrapper">
-        <div class="field modal-section">
+        <h2 class="is-size-3 mb-3">Section Configuration</h2>
+        <div class="modal-section">
           <label class="label">Title</label>
           <input class="input" type="text" value="Section One" />
         </div>
+        <div></div>
+
         <div class="field settings-field">
           <div class="settings-field-box-left">
             <p class="settings-field-header">Is Public</p>
@@ -83,14 +104,15 @@
             </label>
           </div>
         </div>
-        <div class="field settings-field">
+        <!-- <div class="field settings-field">
           <div class="settings-field-box-left">
             <p class="settings-field-header">Add Lesson</p>
             <p>Add a lesson to this section and start editing</p>
-            <!-- <p *ngIf="deleteError" class="danger">{{ deleteError }}</p> -->
+            
           </div>
           <div>
             <button
+              style="color: white !important"
               class="button is-success"
               [ngClass]="{ 'is-loading': deleteLoading }"
               (click)="onAddLesson()"
@@ -98,7 +120,7 @@
               Add Lesson
             </button>
           </div>
-        </div>
+        </div> -->
         <div class="field settings-field">
           <div class="settings-field-box-left">
             <p class="settings-field-header">Delete Section</p>
@@ -121,6 +143,7 @@
         <div class="settings-field-controls buttons">
           <!-- <div class="button is-primary" (click)="onToggleModal()">Cancel</div> -->
           <div class="button is-primary" (click)="onToggleModal()">Close</div>
+          <div class="button is-success" (click)="onToggleModal()">Save</div>
         </div>
       </div>
       <!-- </app-modal> -->

@@ -33,7 +33,7 @@
   padding-right: 20px;
   align-items: center;
   vertical-align: middle;
-  border-bottom: 1px solid rgba($white, 0.2);
+  // border-bottom: 1px solid rgba($white, 0.2);
 
   & .add-lesson-btn {
     margin-left: 10px;
@@ -78,6 +78,7 @@
   padding: 8px;
   flex-wrap: wrap;
   align-items: center;
+  position: relative;
 
   .lesson-card-title {
     margin-left: 20px;
@@ -95,6 +96,38 @@
   .drag-handle {
     @include drag-handle();
   }
+}
+
+.lesson-card-add {
+  // bottom: -10px;
+  z-index: 1;
+
+  // background: rgba($green, 0.2);
+
+  // height: 2px;
+  border: 1px solid $green;
+  position: relative;
+
+  & .lesson-card-add-btn {
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background: $green;
+    border-radius: 4px;
+    line-height: 10px;
+    padding: 2px 10px;
+
+    &:hover {
+      background: lighten($green, 20%);
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: lighten($green, 20%);
+    }
+  }
+  // left: 50%;
 }
 
 .lesson-card-placeholder {

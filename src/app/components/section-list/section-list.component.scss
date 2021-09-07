@@ -22,11 +22,14 @@
 
     .section-controls {
       display: flex;
-      position: sticky;
-      top: 0;
-      align-items: center;
-      justify-content: space-evenly;
       margin: 0;
+
+      & > div {
+        flex-grow: 1;
+        &:nth-child(1) {
+          border-right: 1px solid rgb(211, 211, 211);
+        }
+      }
       z-index: 1;
       & button {
         margin-bottom: 0;
@@ -46,14 +49,18 @@
 
   .note-list-toggle {
     position: fixed;
-    // left: 300px;
-    top: 110px;
+    top: 40%;
     background-color: darken($blue-secondary, 2%);
     padding: 6px;
     width: 30px;
     border-radius: 0px 6px 6px 0px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     z-index: 2;
+
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
 
     &:hover {
       cursor: pointer;
@@ -74,7 +81,7 @@
   }
 
   & .note-list-toggle {
-    left: 0px;
+    left: 0px !important;
   }
 }
 

@@ -61,15 +61,18 @@ export class Lesson {
   body: string = '';
   order: number;
   updatedAt?: Date;
+  section_id: string = '';
 
   constructor(
     title: string,
     order: number,
-    body: string = 'Add you lesson content here...'
+    body: string = 'Add you lesson content here...',
+    section_id: ''
   ) {
     this.id = uuidv4();
     this.title = title;
     this.order = order;
     this.body = body;
+    this.section_id = section_id;
   }
 }

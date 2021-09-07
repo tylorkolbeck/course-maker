@@ -1,9 +1,8 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, Input, OnInit } from '@angular/core';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { CourseService } from '../../../core/services/Course/course.service';
 import { SidebarService } from '../../../core/services/Sidebar/sidebar.service';
-import { Course, Lesson, Section } from '../../../core/Models/Course.model';
+import { Section } from '../../../core/Models/Course.model';
 import { SectionsService } from '../../../core/services/Course/sections.service';
 
 // Todo
@@ -23,6 +22,7 @@ export class SectionListComponent implements OnInit {
   // Subscribe to sections data
   sections$!: Subscription;
   sections: Section[] = [];
+  addingLesson: boolean = false;
 
   constructor(
     private sideNavService: SidebarService,
@@ -46,14 +46,16 @@ export class SectionListComponent implements OnInit {
   }
 
   onAddSection() {
-    const newSectionId = this.sectionsService.addSection();
-    tryScrollToNewElement(10, 'section-' + newSectionId);
+    this.sectionsService.addSection().subscribe((sectionId: any) => {
+      tryScrollToNewElement(10, 'section-' + sectionId);
+    });
 
     // This function makes sure that the element is in the dom before trying to scroll to it
     // if the element does not exsist after the given amount of framerate trys then just give up,
     // its not the important
     function tryScrollToNewElement(trys: number, elId: string) {
       let sectionEl = document.getElementById(elId);
+      console.log('>>>', sectionEl);
 
       trys--;
       if (!sectionEl && trys > 0) {
@@ -76,5 +78,9 @@ export class SectionListComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>) {
     // moveItemInArray(this.sections, event.previousIndex, event.currentIndex);
     // this.courseService.updateSectionsOrder(this.sections);
+  }
+
+  onToggleAddingLessons() {
+    this.addingLesson = !this.addingLesson;
   }
 }

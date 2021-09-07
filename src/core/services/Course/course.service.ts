@@ -28,7 +28,7 @@ export class CourseService {
   sections: Section[] | [] = [];
 
   public lessonBeingEdited$ = new Subject<Lesson>();
-  public sections$ = new Subject<Section[]>();
+  public sections$ = new Subject<Section[] | null>();
 
   private _course: any;
 

@@ -63,8 +63,10 @@ import { LessonListComponent } from './components/lesson-list/lesson-list.compon
         toolbar: [
           ['bold', 'italic', 'underline'],
           [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ align: '' }, { align: 'center' }, { align: 'right' }],
           [{ header: 1 }, { header: 2 }],
           ['link'],
+          ['image'],
         ],
       },
     }),

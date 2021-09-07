@@ -3,9 +3,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Lesson, Section } from '../../../core/Models/Course.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CourseService } from '../../../core/services/Course/course.service';
-import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { SectionsService } from '../../../core/services/Course/sections.service';
+import { LessonDataService } from '../../../core/services/apiServices/lesson/lesson-data.service';
 
 @Component({
   selector: 'app-section',
@@ -14,6 +14,7 @@ import { SectionsService } from '../../../core/services/Course/sections.service'
 })
 export class SectionComponent implements OnInit {
   @Input() section: Section | null = null;
+  @Input() addingLessons!: boolean;
 
   @Input() sectionId: string = '';
   @Input() sectionNumber: string = '';
@@ -30,15 +31,11 @@ export class SectionComponent implements OnInit {
 
   constructor(
     private courseService: CourseService,
-    private http: HttpClient,
-    private sectionsService: SectionsService
+    private sectionsService: SectionsService,
+    private lessonDataService: LessonDataService
   ) {}
 
   ngOnInit(): void {
-    // this.lessons = this.courseService.getSectionLessons(this.sectionId);
-    // this.courseService.lessonBeingEdited.subscribe((lesson) => {
-    //   this.lessonBeingEditedId = lesson.id;
-    // });
     this.isExpanded = !this.collapsed;
   }
 
@@ -73,11 +70,13 @@ export class SectionComponent implements OnInit {
     );
   }
 
-  onAddLesson() {
-    this.courseService.doAddLesson(this.sectionId).subscribe(
-      (res) => {
-        this.onToggleModal();
-        console.log(res);
+  onAddLesson(lessonPosition: number) {
+    console.log(lessonPosition);
+
+    this.lessonDataService.doAddLesson(this.sectionId).subscribe(
+      (lesson: Lesson) => {
+        this.lessons.splice(lessonPosition, 0, lesson);
+        this.isExpanded = true;
       },
       (error) => {}
     );
