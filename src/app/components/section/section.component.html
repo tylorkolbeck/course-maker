@@ -108,74 +108,78 @@
   <div class="modal-background" (click)="onToggleModal()"></div>
   <div class="modal-content">
     <div class="box box--dark">
-      <!-- <app-modal [modalOpen]="editModalOpen"> -->
-      <div class="modal-section-wrapper">
-        <h2 class="is-size-3 mb-3">Section Configuration</h2>
-        <div class="modal-section">
-          <label class="label">Title</label>
-          <input class="input" type="text" value="Section One" />
-        </div>
-        <div></div>
+      <form [formGroup]="sectionForm" (ngSubmit)="onFormSubmit()">
+        <div class="modal-section-wrapper">
+          <!-- <h2 class="is-size-3 mb-3">Section Configuration</h2> -->
+          <div class="modal-section">
+            <label class="label">Section Title</label>
+            <input
+              class="input"
+              type="text"
+              value="Section One"
+              formControlName="title"
+            />
+            <span
+              class="has-text-danger is-italic is-small"
+              *ngIf="!sectionForm?.get('title')?.valid"
+              >Required</span
+            >
+          </div>
+          <div></div>
 
-        <div class="field settings-field">
-          <div class="settings-field-box-left">
-            <p class="settings-field-header">Is Public</p>
-            <p>If set to public students will see this section in the course</p>
+          <div class="field settings-field">
+            <div class="settings-field-box-left">
+              <p class="settings-field-header">Is Public</p>
+              <p>
+                If set to public students will see this section in the course
+              </p>
+            </div>
+            <div>
+              <label class="switch">
+                <input type="checkbox" formControlName="public" />
+                <span class="slider round"></span>
+              </label>
+            </div>
           </div>
-          <div>
-            <label class="switch">
-              <input
-                type="checkbox"
-                [checked]="section?.public"
-                (click)="onTogglePublic()"
-              />
-              <span class="slider round"></span>
-            </label>
+
+          <div class="field settings-field">
+            <div class="settings-field-box-left">
+              <p class="settings-field-header">Delete Section</p>
+              <p>
+                <span class="danger bold">Warning:</span> Deleting this section
+                will delete all of its lessons
+              </p>
+              <p *ngIf="deleteError" class="danger">{{ deleteError }}</p>
+            </div>
+            <div>
+              <button
+                class="button is-danger"
+                [ngClass]="{ 'is-loading': deleteLoading }"
+                (click)="onDeleteSection()"
+              >
+                Delete
+              </button>
+            </div>
           </div>
-        </div>
-        <!-- <div class="field settings-field">
-          <div class="settings-field-box-left">
-            <p class="settings-field-header">Add Lesson</p>
-            <p>Add a lesson to this section and start editing</p>
-            
-          </div>
-          <div>
+          <div class="settings-field-controls buttons">
             <button
-              style="color: white !important"
+              class="button is-primary"
+              type="button"
+              (click)="onToggleModal()"
+            >
+              Cancel
+            </button>
+            <button
               class="button is-success"
-              [ngClass]="{ 'is-loading': deleteLoading }"
-              (click)="onAddLesson()"
+              (click)="onSaveChanges()"
+              type="submit"
+              [disabled]="!sectionForm.valid"
             >
-              Add Lesson
-            </button>
-          </div>
-        </div> -->
-        <div class="field settings-field">
-          <div class="settings-field-box-left">
-            <p class="settings-field-header">Delete Section</p>
-            <p>
-              <span class="danger bold">Warning:</span> Deleting this section
-              will delete all of its lessons
-            </p>
-            <p *ngIf="deleteError" class="danger">{{ deleteError }}</p>
-          </div>
-          <div>
-            <button
-              class="button is-danger"
-              [ngClass]="{ 'is-loading': deleteLoading }"
-              (click)="onDeleteSection()"
-            >
-              Delete
+              Save
             </button>
           </div>
         </div>
-        <div class="settings-field-controls buttons">
-          <!-- <div class="button is-primary" (click)="onToggleModal()">Cancel</div> -->
-          <div class="button is-primary" (click)="onToggleModal()">Close</div>
-          <div class="button is-success" (click)="onToggleModal()">Save</div>
-        </div>
-      </div>
-      <!-- </app-modal> -->
+      </form>
     </div>
   </div>
 </div>

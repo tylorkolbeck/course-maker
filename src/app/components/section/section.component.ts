@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-
 import { Lesson, Section } from '../../../core/Models/Course.model';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CourseService } from '../../../core/services/Course/course.service';
 import { environment } from '../../../environments/environment';
 import { SectionsService } from '../../../core/services/Course/sections.service';
 import { LessonDataService } from '../../../core/services/apiServices/lesson/lesson-data.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-section',
@@ -22,6 +21,8 @@ export class SectionComponent implements OnInit {
   @Input() collapsed: boolean = false;
   @Input() lessons: Lesson[] = [];
 
+  sectionForm!: FormGroup;
+
   lessonBeingEditedId: string = '';
   modalOpen: boolean = false;
   sectionApiUrl: string = environment.sectionApiUrl;
@@ -37,6 +38,11 @@ export class SectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.isExpanded = !this.collapsed;
+
+    this.sectionForm = new FormGroup({
+      title: new FormControl(this.section?.title, Validators.required),
+      public: new FormControl(this.section?.public),
+    });
   }
 
   onEditLesson(lesson: Lesson) {
@@ -63,8 +69,6 @@ export class SectionComponent implements OnInit {
   }
 
   onAddLesson(lessonPosition: number) {
-    console.log(lessonPosition);
-
     this.lessonDataService.doAddLesson(this.sectionId).subscribe(
       (lesson: Lesson) => {
         this.lessons.splice(lessonPosition, 0, lesson);
@@ -81,13 +85,16 @@ export class SectionComponent implements OnInit {
     this.isExpanded = !this.isExpanded;
   }
 
-  onTogglePublic() {
-    this.sectionsService.updateSection(this.sectionId, {
-      public: !this.section?.public,
-    });
+  onSaveChanges() {
+    this.onToggleModal();
+  }
 
+  onFormSubmit() {
+    const formValues = this.sectionForm.value;
     if (this.section) {
-      this.section.public = !this.section?.public;
+      this.section.title = formValues.title;
+      this.section.public = formValues.public;
     }
+    this.sectionsService.updateSection(this.sectionId, this.sectionForm.value);
   }
 }
