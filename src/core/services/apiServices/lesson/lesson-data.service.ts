@@ -28,4 +28,10 @@ export class LessonDataService {
       .delete(`${environment.apiEndpoint}/lessons/${lessonId}`)
       .pipe(map((res) => lessonId));
   }
+
+  fetchLesson(lessonId: string) {
+    return this.http
+      .get(`${environment.apiEndpoint}/lessons/${lessonId}`)
+      .pipe((res) => res);
+  }
 }

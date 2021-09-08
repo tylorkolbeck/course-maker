@@ -1,24 +1,33 @@
-<div class="editor-container" *ngIf="lesson">
-  <div class="editor-header">
-    <input
-      class="input note-list-search-input"
-      type="text"
-      placeholder="Title"
-      [value]="lesson?.title"
-    />
+<div class="editor-header">
+  <input
+    class="input note-list-search-input"
+    type="text"
+    placeholder="Title"
+    [value]="lesson?.title"
+  />
 
-    <div class="editor-header-date">
-      <p>Last Edited: {{ lesson.updatedAt | date }}</p>
-    </div>
-
-    <div class="settings">
-      <div class="navbar-item nav-bar-icon-btn" (click)="onDeleteLesson()">
-        <i class="fas fa-trash"></i>
-      </div>
-    </div>
+  <div class="editor-header-date">
+    <p>Last Edited: {{ lesson?.updatedAt | date }}</p>
   </div>
 
+  <div class="settings">
+    <div class="navbar-item nav-bar-icon-btn btn-save" (click)="onSubmit()">
+      <i class="fas fa-save"></i>
+    </div>
+    <div
+      class="navbar-item nav-bar-icon-btn btn-delete"
+      (click)="onDeleteLesson()"
+    >
+      <i class="fas fa-trash"></i>
+    </div>
+  </div>
+</div>
+
+<div class="editor-container" *ngIf="lesson">
   <div style="height: 100%">
-    <quill-editor [ngModel]="lesson?.body"></quill-editor>
+    <quill-editor
+      [(ngModel)]="htmlText"
+      (onContentChanged)="onContentChanged($event)"
+    ></quill-editor>
   </div>
 </div>

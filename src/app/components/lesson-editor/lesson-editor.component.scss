@@ -43,25 +43,49 @@
 
   .settings {
     height: 100%;
+    display: flex;
 
     .nav-bar-icon-btn {
       transition: all 0.2s ease-in-out;
       height: 100%;
+      padding: 8px;
 
-      i.fas,
-      i.far {
+      &.btn-save {
+        background: rgba($green, 0.1);
+
+        &:hover {
+          background-color: $green;
+          cursor: pointer;
+          & i {
+            color: $white !important;
+          }
+        }
+      }
+
+      &.btn-delete {
+        background: rgba(227, 94, 94, 0.1);
+
+        &:hover {
+          background-color: rgb(227, 94, 94);
+          cursor: pointer;
+          color: $white !important;
+          & i {
+            color: $white !important;
+          }
+        }
+      }
+
+      i.fa-save {
+        transition: all 0.2s ease-in-out;
+        padding: 0 0.6em;
+
+        color: $green;
+      }
+
+      i.fa-trash {
         transition: all 0.2s ease-in-out;
         padding: 0 0.6em;
         color: rgb(227, 94, 94);
-      }
-
-      &:hover {
-        background-color: rgb(227, 94, 94);
-        cursor: pointer;
-
-        i.fas {
-          color: $white !important;
-        }
       }
     }
   }

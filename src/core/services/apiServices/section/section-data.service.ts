@@ -45,4 +45,12 @@ export class SectionDataService {
       payload
     );
   }
+
+  doLessonUpdate(lessonId: string, payload: any) {
+    console.log('>!>!>!', payload);
+    return this.http.post<any>(
+      `${environment.apiEndpoint}/lessons/lessonBody/${lessonId}`,
+      payload
+    );
+  }
 }

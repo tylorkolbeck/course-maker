@@ -125,4 +125,10 @@ export class SectionsService {
       .doSectionUpdate(sectionId, payload)
       .subscribe((res) => console.log(res));
   }
+
+  updateLessonBody(lessonId: string, payload: any) {
+    return this.sectionDataService
+      .doLessonUpdate(lessonId, payload)
+      .subscribe((res) => console.log(res));
+  }
 }
